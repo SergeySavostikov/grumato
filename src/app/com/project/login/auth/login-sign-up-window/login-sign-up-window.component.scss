@@ -2,10 +2,20 @@ label.label {
   display: block;
 }
 
-.submit-left {
-  padding-left: 2rem;
+.card-width {
+  width: 330px;
 }
 
-.cancel-left {
-  padding-left: 1.6rem;
+.button-bottom {
+  display: flex;
+  flex-wrap: nowrap;
+
 }
+
+//.submit-left {
+//  padding-left: 2rem;
+//}
+
+//.cancel-left {
+//  padding-left: 1.6rem;
+//}

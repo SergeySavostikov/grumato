@@ -11,41 +11,41 @@
       <li *ngFor="let dataUser of customers">
         <nb-card style="border: 1px solid aquamarine" (click)="showWorkerInformation(dataUser)">
           <nb-card-header>
-            <div class="row">
-              <div class="col-md-10">
+            <div class="row card-header-flex">
+              <div class="col-md-6">
                 {{dataUser.surname}} - {{dataUser.name}}
               </div>
-              <div class="col-md-2">
+              <div class="col-md-6">
                 <button nbButton status="danger" class="float-right" (click)="onDelete(dataUser)">Удалить</button>
               </div>
             </div>
           </nb-card-header>
 
-          <nb-card-body>
-            <div class="row">
-              <div class="col-md-2">
-                <label for="customerSurname" class="label">Фамилия: </label>
-                <input type="text" id="customerSurname" nbInput readonly value="{{dataUser.surname}}">
+          <nb-card-body class="container col col-sm col-md col-lg col-xl">
+            <div class="row customer-content-flex">
+              <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-2">
+                <label for="customerSurname" class="label label-top col-md-12">Фамилия: </label>
+                <input class="col-md-12" type="text" id="customerSurname" nbInput readonly value="{{dataUser.surname}}">
               </div>
-              <div class="col-md-2">
-                <label for="customerName" class="label">Имя: </label>
-                <input type="text" id="customerName" nbInput readonly value="{{dataUser.name}}">
+              <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-2">
+                <label for="customerName" class="label label-top col-md-12">Имя: </label>
+                <input class="col-md-12" type="text" id="customerName" nbInput readonly value="{{dataUser.name}}">
               </div>
-              <div class="col-md-2">
-                <label for="customerPatronymic" class="label">Отчество: </label>
-                <input type="text" id="customerPatronymic" nbInput readonly value="{{dataUser.patronymic}}">
+              <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-2">
+                <label for="customerPatronymic" class="label label-top col-md-12">Отчество: </label>
+                <input class="col-md-12" type="text" id="customerPatronymic" nbInput readonly value="{{dataUser.patronymic}}">
               </div>
-              <div class="col-md-2">
-                <label for="customercol" class="label">Количество заказов: </label>
-                <input type="text" id="customercol" nbInput readonly value="{{dataUser.customercol}}">
+              <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-2">
+                <label for="customercol" class="label label-top col-md-12">Количество заказов: </label>
+                <input class="col-md-12" type="text" id="customercol" nbInput readonly value="{{dataUser.customercol}}">
               </div>
-              <div class="col-md-2">
-                <label for="company" class="label">Компания: </label>
-                <input type="text" id="company" nbInput readonly value="{{dataUser.company}}">
+              <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-2">
+                <label for="company" class="label label-top col-md-12">Компания: </label>
+                <input class="col-md-12" type="text" id="company" nbInput readonly value="{{dataUser.company}}">
               </div>
-              <div class="col-md-2">
-                <label for="companyNumber" class="label">Номер компании: </label>
-                <input type="text" id="companyNumber" nbInput readonly value="{{dataUser.companyNumber}}">
+              <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-2">
+                <label for="companyNumber" class="label label-top col-md-12">Номер компании: </label>
+                <input class="col-md-12" type="text" id="companyNumber" nbInput readonly value="{{dataUser.companyNumber}}">
               </div>
             </div>
 

@@ -7,3 +7,22 @@
 li {
   list-style-type: none;
 }
+
+.label-top {
+  margin-top: 1rem;
+}
+
+.label-bottom {
+  margin-bottom: 1.5rem;
+}
+
+.card-header-flex {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.order-content-flex {
+  display: flex;
+  justify-content: space-around;
+  white-space: nowrap;
+}
