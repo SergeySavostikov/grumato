@@ -28,9 +28,15 @@
                    value="{{user.direction}}" (change)="changeDirection(direction)">
           </div>
           <div class="Project">
-            <label for="modalUserProject" class="label">Проект</label>
+            <label for="modalUserProject" class="label">Project: </label>
             <input #project type="text" id="modalUserProject" nbInput fullWidth fieldSize="small" placeholder="Project"
                    [value]="onConvertUserProject(user.project)">
+          </div>
+          <div class="Project">
+            <label for="modalUserProject" class="label">Project: </label>
+            <nb-select multiple placeholder="Multiple Select" (selectedChange)="onChangeSelectedOrder(selectedOrders)" #selectedOrders>
+              <nb-option *ngFor="let order of orders" [value]="order.orderCode">{{order.orderName}}</nb-option>
+            </nb-select>
           </div>
           <div class="Other-information">
             <label for="otherInformationUser" class="label">Other information</label>

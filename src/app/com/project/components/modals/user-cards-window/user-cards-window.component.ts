@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Employees} from '../../component-models/users-model/user.model';
-import {NbDialogRef} from '@nebular/theme';
+import {NbDialogRef, NbSelectComponent} from '@nebular/theme';
 import {CustomerEntry} from '../../component-models/customers-model/customer.model';
 import {OrderEntry} from '../../component-models/orders-model/order.model';
 import {UserHelperService} from "../../../services/user.helper.service";
@@ -16,6 +16,7 @@ export class UserCardsWindowComponent implements OnInit {
   customer: CustomerEntry;
   order: OrderEntry;
   orders: OrderEntry[];
+  selectedOrder: string[] = [];
 
   constructor(protected ref: NbDialogRef<UserCardsWindowComponent>, private userHelperService: UserHelperService) {
   }
@@ -86,5 +87,9 @@ export class UserCardsWindowComponent implements OnInit {
 
   onConvertUserProject(orderIds: string): string {
     return this.userHelperService.convertOrderIdsToOrderNameForUsers(orderIds, this.orders)
+  }
+
+  onChangeSelectedOrder(selectedOrders: NbSelectComponent) {
+    this.selectedOrder = selectedOrders.selected;
   }
 }

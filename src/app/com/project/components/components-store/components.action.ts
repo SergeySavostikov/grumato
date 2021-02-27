@@ -95,4 +95,5 @@ export type EditorAction =
   SaveUsers |
   UsersLoaded |
   GetAllDataLoad |
-  GetAllDataLoaded;
+  GetAllDataLoaded |
+  DeleteUser;
