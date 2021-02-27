@@ -1,3 +1,5 @@
+import {OrderEntry} from '../orders-model/order.model';
+
 export interface Employees {
   employeeCode?: number;
   surname: string;
@@ -5,5 +7,6 @@ export interface Employees {
   patronymic: string;
   phoneNumber: string;
   direction: string;
+  project: OrderEntry[];
   // role: string;
 }

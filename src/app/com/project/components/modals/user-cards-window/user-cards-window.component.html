@@ -27,6 +27,11 @@
             <input #direction type="text" id="modalUserDirection" nbInput fullWidth fieldSize="small" placeholder="Direction"
                    value="{{user.direction}}" (change)="changeDirection(direction)">
           </div>
+          <div class="Project">
+            <label for="modalUserProject" class="label">Проект</label>
+            <input #project type="text" id="modalUserProject" nbInput fullWidth fieldSize="small" placeholder="Project"
+                   value="{{user.project}}" (change)="changeProject(project)">
+          </div>
           <div class="Other-information">
             <label for="otherInformationUser" class="label">Other information</label>
             <textarea id="otherInformationUser" nbInput fullWidth placeholder="Other information"></textarea>

@@ -5,14 +5,24 @@
       <input type="text" nbInput class="create-user-margin-bottom" placeholder="please enter surname" [(ngModel)]="this.surname">
       <input type="text" nbInput class="create-user-margin-bottom" placeholder="please enter name" [(ngModel)]="this.name">
       <input type="text" nbInput class="create-user-margin-bottom" placeholder="please enter patronymic" [(ngModel)]="this.patronymic">
-      <input type="text" nbInput class="create-user-margin-bottom" placeholder="please enter phoneNumber" [(ngModel)]="this.phoneNumber">
+      <input type="text" nbInput class="create-user-margin-bottom" placeholder="please enter phone number" [(ngModel)]="this.phoneNumber">
       <input type="text" nbInput class="create-user-margin-bottom" placeholder="please enter direction" [(ngModel)]="this.direction">
+<!--      <nb-select multiple class="create-user-margin-bottom" placeholder="Multiple Select" fullWidth [selected]="selectedOrder">-->
+<!--        <nb-option *ngFor="let order of orders" [value]="order"-->
+<!--        (click)="selectedOrderItem(order)">{{order.orderName}}</nb-option>-->
+<!--      </nb-select>-->
+      <nb-select multiple placeholder="Multiple Select">
+        <nb-option *ngFor="let order of orders" [value]="order.orderCode">{{order.orderName}}</nb-option>
+<!--        <nb-option value="2">Option 2</nb-option>-->
+<!--        <nb-option value="3">Option 3</nb-option>-->
+<!--        <nb-option value="4">Option 4</nb-option>-->
+      </nb-select>
       <input type="text" nbInput class="create-user-margin-bottom" placeholder="please enter role" [(ngModel)]="this.role">
-      <div class="row">
-        <div class="col-md-6">
+      <div class="row button-bottom">
+        <div class="float-left">
           <button nbButton status="info" (click)="submit()">ok</button>
         </div>
-        <div class="col-md-4">
+        <div class="float-right">
           <button nbButton status="danger" class="login-button" (click)="cancel()">cancel</button>
         </div>
       </div>

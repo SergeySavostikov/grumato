@@ -9,6 +9,7 @@ import {UserCardsWindowComponent} from '../modals/user-cards-window/user-cards-w
 import {CreateUserComponent} from '../add-data-modal-window/create-user/create-user.component';
 import {DeleteUser, SaveUsers} from '../components-store/components.action';
 import {selectData} from "../components-state/data.selector";
+import {OrderEntry} from '../component-models/orders-model/order.model';
 
 
 export class BaseResponse {
@@ -26,6 +27,8 @@ export class UsersComponent implements OnInit {
 
   users$ = this.store.pipe(select(selectData));
   users: Employees[] = [];
+  project: OrderEntry[];
+  orders: OrderEntry[];
 
 
   constructor(private dataSourceBuilder: NbTreeGridDataSourceBuilder<Employees>,
@@ -40,7 +43,9 @@ export class UsersComponent implements OnInit {
   }
 
   onAddWorker() {
-    this.dialogService.open(CreateUserComponent).onClose.subscribe(value => {
+    this.dialogService.open(CreateUserComponent, {context: {
+        orders: this.orders
+      }}).onClose.subscribe(value => {
       if (value) {
         this.store.dispatch(new SaveUsers(value));
       }

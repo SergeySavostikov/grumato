@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {NbDialogRef} from '@nebular/theme';
 import {Employees} from '../../component-models/users-model/user.model';
+import {OrderEntry} from '../../component-models/orders-model/order.model';
 
 @Component({
   selector: 'app-create-user',
@@ -14,7 +15,10 @@ export class CreateUserComponent implements OnInit {
   patronymic: string;
   phoneNumber: string;
   direction: string;
+  project: OrderEntry[];
   role: string;
+  orders: OrderEntry[];
+  selectedOrder: OrderEntry = null;
 
   constructor(protected ref: NbDialogRef<CreateUserComponent>) { }
 
@@ -25,13 +29,15 @@ export class CreateUserComponent implements OnInit {
       this.patronymic = this.user.patronymic;
       this.phoneNumber = this.user.phoneNumber;
       this.direction = this.user.direction;
-      this.role = 'нима нихалеры';
+      this.project = this.user.project;
+      this.role = 'nothing';
     } else {
       this.surname = '';
       this.name = '';
       this.patronymic = '';
       this.phoneNumber = '';
       this.direction = '';
+      this.project = [];
       this.role = '';
     }
 
@@ -47,7 +53,12 @@ export class CreateUserComponent implements OnInit {
       patronymic: this.patronymic,
       phoneNumber: this.phoneNumber,
       direction: this.direction,
+      project: this.project,
       role: this.role
     })
+  }
+
+  selectedOrderItem(order: OrderEntry){
+    this.selectedOrder = order;
   }
 }
