@@ -7,6 +7,6 @@ export interface Employees {
   patronymic: string;
   phoneNumber: string;
   direction: string;
-  project: OrderEntry[];
+  project: string;
   // role: string;
 }

@@ -10,6 +10,7 @@ import {CreateUserComponent} from '../add-data-modal-window/create-user/create-u
 import {DeleteUser, SaveUsers} from '../components-store/components.action';
 import {selectData} from "../components-state/data.selector";
 import {OrderEntry} from '../component-models/orders-model/order.model';
+import {UserHelperService} from "../../services/user.helper.service";
 
 
 export class BaseResponse {
@@ -36,17 +37,26 @@ export class UsersComponent implements OnInit {
               private cdr: ChangeDetectorRef,
               private store: Store<AppGrumatoState>,
               private toast: NbToastrService,
-              private postService: HttpService) {
+              private postService: HttpService,
+              private userHelperService: UserHelperService) {
   }
 
   ngOnInit(): void {
+    this.users$.subscribe(data => {
+      if (data) {
+        this.orders = data.data.orders;
+      }
+    })
   }
 
   onAddWorker() {
-    this.dialogService.open(CreateUserComponent, {context: {
+    this.dialogService.open(CreateUserComponent, {
+      context: {
         orders: this.orders
-      }}).onClose.subscribe(value => {
+      }
+    }).onClose.subscribe(value => {
       if (value) {
+
         this.store.dispatch(new SaveUsers(value));
       }
     });
@@ -55,7 +65,8 @@ export class UsersComponent implements OnInit {
   showWorkerInformation(currentUser: Employees) {
     this.dialogService.open(UserCardsWindowComponent, {
       context: {
-        user: currentUser
+        user: currentUser,
+        orders: this.orders
       }
     }).onClose.subscribe(value => {
       if (value) {
@@ -66,6 +77,10 @@ export class UsersComponent implements OnInit {
 
   onDelete(data: Employees) {
     this.store.dispatch(new DeleteUser(data));
+  }
+
+  onUserProjects(project: string): string {
+  return this.userHelperService.convertOrderIdsToOrderNameForUsers(project, this.orders);
   }
 }
 

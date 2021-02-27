@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {NbDialogRef} from '@nebular/theme';
+import {NbDialogRef, NbSelectComponent} from '@nebular/theme';
 import {Employees} from '../../component-models/users-model/user.model';
 import {OrderEntry} from '../../component-models/orders-model/order.model';
+import {UserHelperService} from "../../../services/user.helper.service";
 
 @Component({
   selector: 'app-create-user',
@@ -15,12 +16,12 @@ export class CreateUserComponent implements OnInit {
   patronymic: string;
   phoneNumber: string;
   direction: string;
-  project: OrderEntry[];
+  project: string;
   role: string;
   orders: OrderEntry[];
-  selectedOrder: OrderEntry = null;
+  selectedOrder: string[] = [];
 
-  constructor(protected ref: NbDialogRef<CreateUserComponent>) { }
+  constructor(protected ref: NbDialogRef<CreateUserComponent>, private userHelperService: UserHelperService) { }
 
   ngOnInit(): void {
     if (this.user) {
@@ -37,7 +38,7 @@ export class CreateUserComponent implements OnInit {
       this.patronymic = '';
       this.phoneNumber = '';
       this.direction = '';
-      this.project = [];
+      this.project = '';
       this.role = '';
     }
 
@@ -53,12 +54,12 @@ export class CreateUserComponent implements OnInit {
       patronymic: this.patronymic,
       phoneNumber: this.phoneNumber,
       direction: this.direction,
-      project: this.project,
+      project: this.selectedOrder.length > 0 ? this.userHelperService.convertUserProject(this.selectedOrder) : '',
       role: this.role
     })
   }
 
-  selectedOrderItem(order: OrderEntry){
-    this.selectedOrder = order;
+  onChangeSelectedOrder(selectedOrders: NbSelectComponent) {
+    this.selectedOrder = selectedOrders.selected;
   }
 }

@@ -36,7 +36,7 @@
               </div>
               <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-2">
                 <label class="label label-top col-md-12" for="userProject">Project: </label>
-                <input class="col-md-12" type="text" id="userProject" nbInput readonly value="{{dataUser.project}}">
+                <input class="col-md-12" type="text" id="userProject" nbInput readonly [value]=onUserProjects(dataUser.project)>
               </div>
               <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-2">
                 <label class="col-md-12 label" for="userRole">Role: </label>

@@ -11,7 +11,7 @@
 <!--        <nb-option *ngFor="let order of orders" [value]="order"-->
 <!--        (click)="selectedOrderItem(order)">{{order.orderName}}</nb-option>-->
 <!--      </nb-select>-->
-      <nb-select multiple placeholder="Multiple Select">
+      <nb-select multiple placeholder="Multiple Select" (selectedChange)="onChangeSelectedOrder(selectedOrders)" #selectedOrders>
         <nb-option *ngFor="let order of orders" [value]="order.orderCode">{{order.orderName}}</nb-option>
 <!--        <nb-option value="2">Option 2</nb-option>-->
 <!--        <nb-option value="3">Option 3</nb-option>-->
