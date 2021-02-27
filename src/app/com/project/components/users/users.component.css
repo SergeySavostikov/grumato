@@ -18,7 +18,5 @@ li {
 }
 
 .user-content-flex {
-  display: flex;
-  justify-content: space-around;
-  white-space: nowrap;
+  justify-content: space-between;
 }

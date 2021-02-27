@@ -101,7 +101,7 @@ export class HttpService {
     return this.http.post("http://localhost:8080/users/add", value, {headers: {"Content-type": "application/json"}})
   }
 
-  deleteUser(value: Employees) {
+  deleteUser(value: Employees): Observable<any> {
     let body = {
       employees: value
     };

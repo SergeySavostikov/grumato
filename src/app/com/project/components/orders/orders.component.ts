@@ -23,6 +23,7 @@ export class OrdersComponent implements OnInit {
   orders: OrderEntry[] = [];
   orders$ = this.store.pipe(select(selectData));
   customers: CustomerEntry[];
+
   constructor(private dataSourceBuilder: NbTreeGridDataSourceBuilder<Employees>,
               private dialogService: NbDialogService,
               private cdr: ChangeDetectorRef,
@@ -32,20 +33,24 @@ export class OrdersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  this.orders$.subscribe(value => {
-    if (value) {
-      this.orders = value.data.orders;
-      this.customers = value.data.customers;
-      this.cdr.detectChanges();
-    }
-  });
+    this.store.dispatch(new GetAllDataLoad());
+    this.orders$.subscribe(value => {
+      console.log(value);
+      if (value) {
+        this.orders = value.data.orders;
+        this.customers = value.data.customers;
+        this.cdr.detectChanges();
+      }
+    });
   }
 
 
   onAddOrder() {
-    this.dialogService.open(CreateOrderComponent, {context: {
-      customers: this.customers
-      }}).onClose.subscribe(value => {
+    this.dialogService.open(CreateOrderComponent, {
+      context: {
+        customers: this.customers
+      }
+    }).onClose.subscribe(value => {
       if (value) {
         this.store.dispatch(new SaveOrders(value))
       }

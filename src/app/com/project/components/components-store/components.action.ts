@@ -2,7 +2,6 @@ import {Action} from '@ngrx/store';
 import {Employees} from '../component-models/users-model/user.model';
 import {OrderEntry} from '../component-models/orders-model/order.model';
 import {CustomerEntry} from '../component-models/customers-model/customer.model';
-import {DataModel} from "../component-models/data-model/data-model";
 import {DataState} from "../components-state/data.state";
 
 export enum EEditorActions {
@@ -14,7 +13,8 @@ export enum EEditorActions {
   SaveUsers = "[Editor] Save users",
   UserLoaded = "[Editor] Users loaded",
   GetAllDataLoad = "[Editor] Get All Data Load",
-  GetAllDataLoaded = "[Editor] Get All Data Loaded"
+  GetAllDataLoaded = "[Editor] Get All Data Loaded",
+  DeleteUser = "[Editor] Delete User"
 }
 
 
@@ -76,6 +76,13 @@ export class GetAllDataLoaded implements Action {
   public readonly type = EEditorActions.GetAllDataLoaded;
 
   constructor(public payload: DataState) {
+  }
+}
+
+export class DeleteUser implements Action {
+  public readonly type = EEditorActions.DeleteUser;
+
+  constructor(public payload: Employees) {
   }
 }
 

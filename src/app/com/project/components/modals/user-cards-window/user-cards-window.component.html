@@ -10,34 +10,25 @@
       <div class="description-flex" *ngIf="user">
         <div class="description">
           <div class="FIO">
-            <label for="modalUserSurname" class="label">Фамилия</label>
+            <label for="modalUserSurname" class="label">FIO</label>
             <input #surname type="text" id="modalUserSurname" nbInput fullWidth fieldSize="small" placeholder="Surname" (change)="changeSurname(surname)"
-                   value="{{user.surname}}">
-          </div>
-          <div class="FIO">
-            <label for="modalUserName" class="label">Имя</label>
-            <input #name type="text" id="modalUserName" nbInput fullWidth fieldSize="small" placeholder="Name" value="{{user.name}}" (change)="changeName(name)">
-          </div>
-          <div class="FIO">
-            <label for="modalUserPatronymic" class="label">Отчество</label>
-            <input #patronymic type="text" id="modalUserPatronymic" nbInput fullWidth fieldSize="small" placeholder="Patronymic"
-                   value="{{user.patronymic}}" (change)="changePatronymic(patronymic)">
+                   value="{{user.surname}} {{user.name}} {{user.patronymic}}">
           </div>
         </div>
         <br>
         <div>
           <div class="Number">
-            <label for="modalUserPhoneNumber" class="label">Номер телефона</label>
+            <label for="modalUserPhoneNumber" class="label">Phone: </label>
             <input #phoneNumber type="text" id="modalUserPhoneNumber" nbInput fullWidth fieldSize="small" placeholder="Phone"
                    value="{{user.phoneNumber}}" (change)="changePhoneNumber(phoneNumber)">
           </div>
           <div class="Direction">
-            <label for="modalUserDirection" class="label">Направление</label>
+            <label for="modalUserDirection" class="label">Direction: </label>
             <input #direction type="text" id="modalUserDirection" nbInput fullWidth fieldSize="small" placeholder="Direction"
                    value="{{user.direction}}" (change)="changeDirection(direction)">
           </div>
           <div class="Other-information">
-            <label for="otherInformationUser" class="label">Дополнительная информация</label>
+            <label for="otherInformationUser" class="label">Other information</label>
             <textarea id="otherInformationUser" nbInput fullWidth placeholder="Other information"></textarea>
           </div>
         </div>
@@ -53,12 +44,7 @@
           </div>
           <div class="FIO">
             <label for="customerCol" class="label">Список проектов</label>
-            <input #customerCol type="text" id="customerCol" nbInput fullWidth fieldSize="small" placeholder="customerCode" value="{{order.customerCode}}" (change)="changeName(customerCode)">
-          </div>
-          <div class="FIO">
-            <label for="patronymic" class="label">Код продукта</label>
-            <input #productCode type="text" id="patronymic" nbInput fullWidth fieldSize="small" placeholder="productCode"
-                   value="{{order.productCode}}" (change)="changePatronymic(productCode)">
+            <input #customerCol type="text" id="customerCol" nbInput fullWidth fieldSize="small" placeholder="customerCode" value="{{order.customerCode}}" (change)="changeName(customerCol)">
           </div>
         </div>
         <br>
@@ -74,8 +60,8 @@
                    value="{{order.orderExecutionDate}}" (change)="changeDirection(orderExecutionDate)">
           </div>
           <div class="Cost">
-            <label for="direction" class="label">Цена заказа</label>
-            <input #orderCost type="text" id="direction" nbInput fullWidth fieldSize="small" placeholder="orderCost"
+            <label class="label">Цена заказа</label>
+            <input #orderCost type="text" nbInput fullWidth fieldSize="small" placeholder="orderCost"
                    value="{{order.orderCost}}" (change)="changeDirection(orderCost)">
           </div>
           <div class="Other-information">
@@ -116,8 +102,8 @@
               value="{{customer.companyNumber}}">
           </div>
           <div class="Direction">
-            <label for="customerPatronymic" class="label">Количество заказов</label>
-            <input #customerPatronymic type="text" id="customerPatronymic" nbInput fullWidth fieldSize="small" placeholder="customercol"
+            <label class="label">Количество заказов</label>
+            <input #customerPatronymic type="text" nbInput fullWidth fieldSize="small" placeholder="customercol"
               value="{{customer.customercol}}">
           </div>
           <div class="Other-information">
