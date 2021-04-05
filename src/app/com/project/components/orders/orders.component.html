@@ -2,7 +2,7 @@
   <nb-card-header>
     <div class="row">
       <div class="col-md-10">
-        <button nbButton status="success" (click)="onAddOrder()">Добавить заказ</button>
+        <button nbButton status="success" (click)="onAddOrder()">Add order</button>
       </div>
     </div>
   </nb-card-header>
@@ -16,38 +16,38 @@
                 {{order.orderCode}} - {{order.orderName}}
               </div>
               <div class="col-md-6">
-                <button nbButton status="danger" class="float-right" (click)="onDelete(order)">Удалить</button>
+                <button nbButton status="danger" class="float-right" (click)="onDelete(order)">Delete</button>
               </div>
             </div>
           </nb-card-header>
           <nb-card-body class="container col col-sm col-md col-lg col-xl">
             <div class="row order-content-flex">
               <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-2">
-                <label class="label label-top label-bottom col-md-12">Название заказа: </label>
+                <label class="label label-top label-bottom col-md-12">Order name: </label>
                 <input class="col-md-12" type="text" nbInput readonly value="{{order.orderName}}">
               </div>
               <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-2">
-                <label class="label label-top label-bottom col-md-12">Описание заказа: </label>
+                <label class="label label-top label-bottom col-md-12">Order description: </label>
                 <input class="col-md-12" type="text" nbInput readonly value="{{order.orderDescription}}">
               </div>
               <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-2">
-                <label class="label label-top label-bottom col-md-12">Код заказчика: </label>
+                <label class="label label-top label-bottom col-md-12">Customer code: </label>
                 <input class="col-md-12" type="text" nbInput readonly value="{{order.customerCode}}">
               </div>
               <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-2">
-                <label class="label label-top col-md-12">Дата начала<br> выполнения заказа: </label>
+                <label class="label label-top col-md-12">Order start date: </label>
                 <input class="col-md-12" nbInput readonly placeholder="dateOfReceiptOfOrder"
                        [nbDatepicker]="dateOfReceiptOfOrder" value="{{order.dateOfReceiptOfOrder}}">
                 <nb-datepicker #dateOfReceiptOfOrder></nb-datepicker>
               </div>
               <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-2">
-                <label class="label label-top col-md-12">Дата окончания<br> выполнения заказа: </label>
+                <label class="label label-top col-md-12">Order finish date: </label>
                 <input class="col-md-12" nbInput readonly placeholder="Form Picker" [nbDatepicker]="orderExecutionDate"
                        value="{{order.orderExecutionDate}}">
                 <nb-datepicker #orderExecutionDate></nb-datepicker>
               </div>
               <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-2">
-                <label class="label label-top label-bottom col-md-12">Цена заказа: </label>
+                <label class="label label-top label-bottom col-md-12">Order price: </label>
                 <input class="col-md-12" type="text" nbInput readonly value="{{order.orderCost}}">
               </div>
             </div>

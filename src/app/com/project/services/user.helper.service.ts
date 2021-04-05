@@ -10,10 +10,12 @@ export class UserHelperService {
   }
 
   convertOrderIdsToOrderNameForUsers(projectIds: string, orders: OrderEntry[]): string {
-    let orderIds: string[] = projectIds.split(','), result: string[] = [];
+    const orderIds: string[] = projectIds.split(','), result: string[] = [];
     for (let projectId of orderIds) {
-      let orderEntry = orders.find(order => order.orderCode === parseInt(projectId));
-      result.push(orderEntry.orderName);
+      const orderEntry = orders.find(order => order.orderCode === parseInt(projectId));
+      if(orderEntry) {
+        result.push(orderEntry.orderName);
+      }
     }
     return this.convertUserProject(result);
   }

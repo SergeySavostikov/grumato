@@ -2,7 +2,7 @@
   <nb-card-header>
     <div class="row">
       <div class="col-md-10">
-        <button nbButton status="success" (click)="onAddCustomer()">Добавить заказчика</button>
+        <button nbButton status="success" (click)="onAddCustomer()">Add customer</button>
       </div>
     </div>
   </nb-card-header>
@@ -16,7 +16,7 @@
                 {{dataUser.surname}} - {{dataUser.name}}
               </div>
               <div class="col-md-6">
-                <button nbButton status="danger" class="float-right" (click)="onDelete(dataUser)">Удалить</button>
+                <button nbButton status="danger" class="float-right" (click)="onDelete(dataUser)">Delete</button>
               </div>
             </div>
           </nb-card-header>
@@ -24,27 +24,27 @@
           <nb-card-body class="container col col-sm col-md col-lg col-xl">
             <div class="row customer-content-flex">
               <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-2">
-                <label for="customerSurname" class="label label-top col-md-12">Фамилия: </label>
+                <label for="customerSurname" class="label label-top col-md-12">Surname: </label>
                 <input class="col-md-12" type="text" id="customerSurname" nbInput readonly value="{{dataUser.surname}}">
               </div>
               <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-2">
-                <label for="customerName" class="label label-top col-md-12">Имя: </label>
+                <label for="customerName" class="label label-top col-md-12">Name: </label>
                 <input class="col-md-12" type="text" id="customerName" nbInput readonly value="{{dataUser.name}}">
               </div>
               <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-2">
-                <label for="customerPatronymic" class="label label-top col-md-12">Отчество: </label>
+                <label for="customerPatronymic" class="label label-top col-md-12">Patronymic: </label>
                 <input class="col-md-12" type="text" id="customerPatronymic" nbInput readonly value="{{dataUser.patronymic}}">
               </div>
               <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-2">
-                <label for="customercol" class="label label-top col-md-12">Количество заказов: </label>
+                <label for="customercol" class="label label-top col-md-12">Number of orders: </label>
                 <input class="col-md-12" type="text" id="customercol" nbInput readonly value="{{dataUser.customercol}}">
               </div>
               <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-2">
-                <label for="company" class="label label-top col-md-12">Компания: </label>
+                <label for="company" class="label label-top col-md-12">Company: </label>
                 <input class="col-md-12" type="text" id="company" nbInput readonly value="{{dataUser.company}}">
               </div>
               <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-2">
-                <label for="companyNumber" class="label label-top col-md-12">Номер компании: </label>
+                <label for="companyNumber" class="label label-top col-md-12">Company number: </label>
                 <input class="col-md-12" type="text" id="companyNumber" nbInput readonly value="{{dataUser.companyNumber}}">
               </div>
             </div>

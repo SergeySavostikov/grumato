@@ -18,6 +18,8 @@ export class UserCardsWindowComponent implements OnInit {
   orders: OrderEntry[];
   selectedOrder: string[] = [];
 
+  image: any = "../../../../../../assets/images/default_avatar.jpg";
+
   constructor(protected ref: NbDialogRef<UserCardsWindowComponent>, private userHelperService: UserHelperService) {
   }
 
@@ -86,10 +88,14 @@ export class UserCardsWindowComponent implements OnInit {
   }
 
   onConvertUserProject(orderIds: string): string {
-    return this.userHelperService.convertOrderIdsToOrderNameForUsers(orderIds, this.orders)
+    return this.userHelperService.convertOrderIdsToOrderNameForUsers(orderIds, this.orders);
   }
 
   onChangeSelectedOrder(selectedOrders: NbSelectComponent) {
     this.selectedOrder = selectedOrders.selected;
+  }
+
+  changeImage() {
+    this.image = "../../../../../../assets/images/alternative_avatar.jpg";
   }
 }
