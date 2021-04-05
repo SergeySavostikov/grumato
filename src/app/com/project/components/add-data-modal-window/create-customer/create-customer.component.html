@@ -6,16 +6,16 @@
       <input type="text" nbInput class="create-customer-margin-bottom" placeholder="enter name" [(ngModel)]="this.name">
       <input type="text" nbInput class="create-customer-margin-bottom" placeholder="enter patronymic" [(ngModel)]="this.patronymic">
       <input type="text" nbInput class="create-customer-margin-bottom" placeholder="enter company" [(ngModel)]="this.company">
-      <input type="text" nbInput class="create-customer-margin-bottom" placeholder="enter companyNumber" [(ngModel)]="this.companyNumber">
+      <input type="text" nbInput class="create-customer-margin-bottom" placeholder="enter company number" [(ngModel)]="this.companyNumber">
       <div class="row add_order_flex">
-        <input type="text" #orderValue nbInput class="create-customer-margin-bottom order_input" placeholder="enter customercol" [(ngModel)]="this.customercol">
+        <input type="text" #orderValue nbInput class="create-customer-margin-bottom order_input" placeholder="enter number of orders" [(ngModel)]="this.customercol">
         <button nbButton class="add_order" status="success" (click)="addOrder(orderValue)">+</button>
       </div>
-      <div class="row">
-        <div class="col-md-4">
+      <div class="row button-bottom">
+        <div class="float-left">
           <button nbButton status="info"  (click)="submit()">ok</button>
         </div>
-        <div>
+        <div class="float-right">
           <button nbButton status="danger" class="cancel_button" (click)="cancel()">cancel</button>
         </div>
       </div>

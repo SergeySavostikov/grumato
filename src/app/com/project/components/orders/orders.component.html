@@ -2,7 +2,7 @@
   <nb-card-header>
     <div class="row">
       <div class="col-md-10">
-        <button nbButton status="success" (click)="onAddOrder()">Добавить заказ</button>
+        <button nbButton status="success" (click)="onAddOrder()">Add order</button>
       </div>
     </div>
   </nb-card-header>
@@ -11,44 +11,44 @@
       <li *ngFor="let order of (orders$ | async).data.orders">
         <nb-card (click)="showWorkerInformation(order)" style="border: 1px solid aquamarine">
           <nb-card-header>
-            <div class="row">
-              <div class="col-md-10">
+            <div class="row card-header-flex">
+              <div class="col-md-6">
                 {{order.orderCode}} - {{order.orderName}}
               </div>
-              <div class="col-md-2">
-                <button nbButton status="danger" class="float-right" (click)="onDelete(order)">Удалить</button>
+              <div class="col-md-6">
+                <button nbButton status="danger" class="float-right" (click)="onDelete(order)">Delete</button>
               </div>
             </div>
           </nb-card-header>
-          <nb-card-body>
-            <div class="row">
-              <div class="col-md-2">
-                <label class="label">Название заказа: </label>
-                <input type="text" nbInput readonly value="{{order.orderName}}">
+          <nb-card-body class="container col col-sm col-md col-lg col-xl">
+            <div class="row order-content-flex">
+              <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-2">
+                <label class="label label-top label-bottom col-md-12">Order name: </label>
+                <input class="col-md-12" type="text" nbInput readonly value="{{order.orderName}}">
               </div>
-              <div class="col-md-2">
-                <label class="label">Описание заказа: </label>
-                <input type="text" nbInput readonly value="{{order.orderDescription}}">
+              <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-2">
+                <label class="label label-top label-bottom col-md-12">Order description: </label>
+                <input class="col-md-12" type="text" nbInput readonly value="{{order.orderDescription}}">
               </div>
-              <div class="col-md-2">
-                <label class="label">Код заказчика: </label>
-                <input type="text" nbInput readonly value="{{order.customerCode}}">
+              <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-2">
+                <label class="label label-top label-bottom col-md-12">Customer code: </label>
+                <input class="col-md-12" type="text" nbInput readonly value="{{order.customerCode}}">
               </div>
-              <div class="col-md-2">
-                <label  class="label">Дата начала выполнения заказа: </label>
-                <input  nbInput readonly placeholder="dateOfReceiptOfOrder"
+              <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-2">
+                <label class="label label-top col-md-12">Order start date: </label>
+                <input class="col-md-12" nbInput readonly placeholder="dateOfReceiptOfOrder"
                        [nbDatepicker]="dateOfReceiptOfOrder" value="{{order.dateOfReceiptOfOrder}}">
                 <nb-datepicker #dateOfReceiptOfOrder></nb-datepicker>
               </div>
-              <div class="col-md-2">
-                <label class="label">Дата окончания выполнения заказа: </label>
-                <input  nbInput readonly placeholder="Form Picker" [nbDatepicker]="orderExecutionDate"
+              <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-2">
+                <label class="label label-top col-md-12">Order finish date: </label>
+                <input class="col-md-12" nbInput readonly placeholder="Form Picker" [nbDatepicker]="orderExecutionDate"
                        value="{{order.orderExecutionDate}}">
                 <nb-datepicker #orderExecutionDate></nb-datepicker>
               </div>
-              <div class="col-md-2">
-                <label class="label">Цена заказа: </label>
-                <input type="text" nbInput readonly value="{{order.orderCost}}">
+              <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-2">
+                <label class="label label-top label-bottom col-md-12">Order price: </label>
+                <input class="col-md-12" type="text" nbInput readonly value="{{order.orderCost}}">
               </div>
             </div>
           </nb-card-body>

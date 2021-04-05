@@ -43,6 +43,7 @@ import {CreateCustomerComponent} from './com/project/components/add-data-modal-w
 import {CreateUserComponent} from './com/project/components/add-data-modal-window/create-user/create-user.component';
 import {AppGrumatoState, getInitialState} from "./com/project/store/app-grumato.state";
 import {GetAllDataLoad} from "./com/project/components/components-store/components.action";
+import {UserHelperService} from "./com/project/services/user.helper.service";
 
 @NgModule({
   declarations: [
@@ -84,7 +85,7 @@ import {GetAllDataLoad} from "./com/project/components/components-store/componen
     NbSelectModule,
     NbToastrModule.forRoot()
   ],
-  providers: [HttpService, NbToastrService,
+  providers: [HttpService, NbToastrService, UserHelperService,
     {
       provide: APP_INITIALIZER,
       useFactory: (store: Store<AppGrumatoState>) => {

@@ -1,7 +1,7 @@
 <div class="col-md-12">
   <nb-card>
     <nb-card-header>Order</nb-card-header>
-    <nb-card-body>
+    <nb-card-body class="card-adaptive">
       <nb-select placeholder="Select Showcase" [selected]="selectedCustomer" fullWidth class="create-order-margin-bottom">
         <nb-option *ngFor="let customer of customers" [value]="customer"
                    (click)="changeSelectedItem(customer)">{{customer.name}}</nb-option>
@@ -49,17 +49,17 @@
         </div>
         <input type="text" nbInput class="login-input create-order-margin-bottom" placeholder="please enter order name" fullWidth
                [(ngModel)]="this.orderName">
-        <input type="text" nbInput class="login-input create-order-margin-bottom" placeholder="please enter orderCost" fullWidth
+        <input type="text" nbInput class="login-input create-order-margin-bottom" placeholder="please enter order cost" fullWidth
                [(ngModel)]="this.orderCost">
         <div class="input-group create-order-margin-bottom">
           <textarea nbInput fullWidth placeholder="please enter order description" [(ngModel)]="orderDescription"></textarea>
         </div>
-        <div class="row">
-          <div class="col-md-4">
-            <button nbButton status="info" (click)="submit()">ok</button>
+        <div class="row button-bottom">
+          <div>
+            <button nbButton status="info" class="float-left" (click)="submit()">ok</button>
           </div>
           <div>
-            <button nbButton status="danger" class="login-button" (click)="cancel()">cancel</button>
+            <button nbButton status="danger" class="float-right" (click)="cancel()">cancel</button>
           </div>
         </div>
       </div>

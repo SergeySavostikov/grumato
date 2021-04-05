@@ -4,8 +4,9 @@ import {Store} from '@ngrx/store';
 import {AppGrumatoState} from '../../../store/app-grumato.state';
 import {Router} from '@angular/router';
 import {HttpService} from '../../../services/http.service';
-import {map} from 'rxjs/operators';
+import {map, switchMap} from 'rxjs/operators';
 import {
+  DeleteUser,
   EEditorActions,
   GetAllDataLoad,
   GetAllDataLoaded,
@@ -76,7 +77,11 @@ export class DataEffect {
   addUsers$ = this.actions$.pipe(
     ofType<SaveUsers>(EEditorActions.SaveUsers),
     map((action) => {
-      this.httpService.postUsers(action.payload);
+      this.httpService.postUsers(action.payload).subscribe(value => {
+        if ((value as BaseResponse).status === '200') {
+          this.store.dispatch(new GetAllDataLoad());
+        }
+      })
     })
   );
 
@@ -96,6 +101,17 @@ export class DataEffect {
         if (result)
           this.store.dispatch(new GetAllDataLoaded(result))
       });
+    })
+  );
+
+  @Effect({dispatch: false})
+  deleteUser$ = this.actions$.pipe(
+    ofType<DeleteUser>(EEditorActions.DeleteUser),
+    switchMap((action) => {
+      return this.httpService.deleteUser(action.payload);
+    }),
+    map(() => {
+      this.store.dispatch(new GetAllDataLoad());
     })
   )
 }

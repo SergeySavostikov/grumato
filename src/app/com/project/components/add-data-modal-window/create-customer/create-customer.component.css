@@ -20,25 +20,19 @@
   height: 40px;
 }
 
-.order_dropdown {
-  margin-bottom: 2rem;
-}
-
-.cancel_order {
-  position: relative;
-  left: 6em;
-}
-
-.cancel_button {
-  position: relative;
-  left: 4em;
-}
+/*.cancel_button {*/
+/*  position: relative;*/
+/*  left: 4em;*/
+/*}*/
 
 .create-customer-margin-bottom{
   display: block;
   margin-bottom: 2rem;
 }
 
-.order_input {
-  max-width: 170px;
+.button-bottom {
+  margin: 0;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
 }

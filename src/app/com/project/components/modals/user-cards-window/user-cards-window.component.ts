@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Employees} from '../../component-models/users-model/user.model';
-import {NbDialogRef} from '@nebular/theme';
+import {NbDialogRef, NbSelectComponent} from '@nebular/theme';
 import {CustomerEntry} from '../../component-models/customers-model/customer.model';
 import {OrderEntry} from '../../component-models/orders-model/order.model';
+import {UserHelperService} from "../../../services/user.helper.service";
 
 @Component({
   selector: 'app-user-cards-window',
@@ -14,8 +15,12 @@ export class UserCardsWindowComponent implements OnInit {
   user: Employees;
   customer: CustomerEntry;
   order: OrderEntry;
+  orders: OrderEntry[];
+  selectedOrder: string[] = [];
 
-  constructor(protected ref: NbDialogRef<UserCardsWindowComponent>) {
+  image: any = "../../../../../../assets/images/default_avatar.jpg";
+
+  constructor(protected ref: NbDialogRef<UserCardsWindowComponent>, private userHelperService: UserHelperService) {
   }
 
   ngOnInit(): void {
@@ -80,5 +85,17 @@ export class UserCardsWindowComponent implements OnInit {
 
   changeDirection(direction: HTMLInputElement) {
     this.user.direction = direction.value;
+  }
+
+  onConvertUserProject(orderIds: string): string {
+    return this.userHelperService.convertOrderIdsToOrderNameForUsers(orderIds, this.orders);
+  }
+
+  onChangeSelectedOrder(selectedOrders: NbSelectComponent) {
+    this.selectedOrder = selectedOrders.selected;
+  }
+
+  changeImage() {
+    this.image = "../../../../../../assets/images/alternative_avatar.jpg";
   }
 }

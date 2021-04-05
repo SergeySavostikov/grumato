@@ -1,9 +1,9 @@
 .card-body-style {
-  /*display: flex;*/
 }
 
 .user-flex {
   display: flex;
+  flex-wrap: wrap;
   width: 11rem;
   float: left;
 }
@@ -15,6 +15,11 @@
   border-radius: 15px;
 }
 
+.avatar-button {
+  width: 150px;
+  margin-top: 1rem;
+}
+
 /*.nb-user[picture] {*/
 /*  width: 150px !important;*/
 /*  height: 150px !important;*/
@@ -22,9 +27,6 @@
 
 .description-flex {
   display: flow-root;
-  /*float: left;*/
-  /*display: flex;*/
-  /*flex-direction: column;*/
 }
 
 .description {

@@ -6,3 +6,10 @@
   display: flex;
   flex-direction: column;
 }
+
+.button-bottom {
+  margin: 0;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}

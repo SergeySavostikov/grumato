@@ -5,39 +5,43 @@
     <nb-card-header *ngIf="order">Order information</nb-card-header>
     <nb-card-body class="example-items-col card-body-style">
       <div class="user-flex">
-        <img class="avatar" (click)="showAvatar()" src="../../../../../../assets/images/default_avatar.jpg"/>
+<!--        <img class="avatar" (click)="showAvatar()" src="../../../../../../assets/images/default_avatar.jpg"/>-->
+        <img class="avatar" (click)="showAvatar()" [src]="image"/>
+        <button nbButton class="avatar-button" (click)="changeImage()">Change image</button>
       </div>
       <div class="description-flex" *ngIf="user">
         <div class="description">
           <div class="FIO">
-            <label for="modalUserSurname" class="label">Фамилия</label>
+            <label for="modalUserSurname" class="label">FIO</label>
             <input #surname type="text" id="modalUserSurname" nbInput fullWidth fieldSize="small" placeholder="Surname" (change)="changeSurname(surname)"
-                   value="{{user.surname}}">
-          </div>
-          <div class="FIO">
-            <label for="modalUserName" class="label">Имя</label>
-            <input #name type="text" id="modalUserName" nbInput fullWidth fieldSize="small" placeholder="Name" value="{{user.name}}" (change)="changeName(name)">
-          </div>
-          <div class="FIO">
-            <label for="modalUserPatronymic" class="label">Отчество</label>
-            <input #patronymic type="text" id="modalUserPatronymic" nbInput fullWidth fieldSize="small" placeholder="Patronymic"
-                   value="{{user.patronymic}}" (change)="changePatronymic(patronymic)">
+                   value="{{user.surname}} {{user.name}} {{user.patronymic}}">
           </div>
         </div>
         <br>
         <div>
           <div class="Number">
-            <label for="modalUserPhoneNumber" class="label">Номер телефона</label>
+            <label for="modalUserPhoneNumber" class="label">Phone: </label>
             <input #phoneNumber type="text" id="modalUserPhoneNumber" nbInput fullWidth fieldSize="small" placeholder="Phone"
                    value="{{user.phoneNumber}}" (change)="changePhoneNumber(phoneNumber)">
           </div>
           <div class="Direction">
-            <label for="modalUserDirection" class="label">Направление</label>
+            <label for="modalUserDirection" class="label">Direction: </label>
             <input #direction type="text" id="modalUserDirection" nbInput fullWidth fieldSize="small" placeholder="Direction"
                    value="{{user.direction}}" (change)="changeDirection(direction)">
           </div>
+          <div class="Project">
+            <label for="modalUserProject" class="label">Project: </label>
+            <input #project type="text" id="modalUserProject" nbInput fullWidth fieldSize="small" placeholder="Project"
+                   [value]="onConvertUserProject(user.project)">
+          </div>
+          <div class="Project">
+            <label for="modalUserProject" class="label">Project: </label>
+            <nb-select multiple fullWidth placeholder="Multiple Select" (selectedChange)="onChangeSelectedOrder(selectedOrders)" #selectedOrders>
+              <nb-option *ngFor="let order of orders" [value]="order.orderCode">{{order.orderName}}</nb-option>
+            </nb-select>
+          </div>
           <div class="Other-information">
-            <label for="otherInformationUser" class="label">Дополнительная информация</label>
+            <label for="otherInformationUser" class="label">Other information</label>
             <textarea id="otherInformationUser" nbInput fullWidth placeholder="Other information"></textarea>
           </div>
         </div>
@@ -47,39 +51,34 @@
       <div class="description-flex" *ngIf="order">
         <div class="description">
           <div class="FIO">
-            <label for="orderDescription" class="label">Описание заказа</label>
-            <input #orderDescription type="text" id="orderDescription" nbInput fullWidth fieldSize="small" placeholder="orderDescription" (change)="changeSurname(orderDescription)"
+            <label for="orderDescription" class="label">Order description</label>
+            <input #orderDescription type="text" id="orderDescription" nbInput fullWidth fieldSize="small" placeholder="Order description" (change)="changeSurname(orderDescription)"
                    value="{{order.orderDescription}}">
           </div>
           <div class="FIO">
-            <label for="customerCol" class="label">Список проектов</label>
-            <input #customerCol type="text" id="customerCol" nbInput fullWidth fieldSize="small" placeholder="customerCode" value="{{order.customerCode}}" (change)="changeName(customerCode)">
-          </div>
-          <div class="FIO">
-            <label for="patronymic" class="label">Код продукта</label>
-            <input #productCode type="text" id="patronymic" nbInput fullWidth fieldSize="small" placeholder="productCode"
-                   value="{{order.productCode}}" (change)="changePatronymic(productCode)">
+            <label for="customerCol" class="label">Customer code</label>
+            <input #customerCol type="text" id="customerCol" nbInput fullWidth fieldSize="small" placeholder="Customer code" value="{{order.customerCode}}" (change)="changeName(customerCol)">
           </div>
         </div>
         <br>
         <div>
           <div class="Number">
-            <label for="phoneNumber" class="label">Дата принятие заказа</label>
-            <input #dateOfReceiptOfOrder type="text" id="phoneNumber" nbInput fullWidth fieldSize="small" placeholder="dateOfReceiptOfOrder"
+            <label for="phoneNumber" class="label">Order start date</label>
+            <input #dateOfReceiptOfOrder type="text" id="phoneNumber" nbInput fullWidth fieldSize="small" placeholder="Date of receipt of order"
                    value="{{order.dateOfReceiptOfOrder}}" (change)="changePhoneNumber(dateOfReceiptOfOrder)">
           </div>
           <div class="Direction">
-            <label for="direction" class="label">Дата выполнения заказа</label>
-            <input #orderExecutionDate type="text" id="direction" nbInput fullWidth fieldSize="small" placeholder="orderExecutionDate"
+            <label for="direction" class="label">Order finish date</label>
+            <input #orderExecutionDate type="text" id="direction" nbInput fullWidth fieldSize="small" placeholder="Order execution date"
                    value="{{order.orderExecutionDate}}" (change)="changeDirection(orderExecutionDate)">
           </div>
           <div class="Cost">
-            <label for="direction" class="label">Цена заказа</label>
-            <input #orderCost type="text" id="direction" nbInput fullWidth fieldSize="small" placeholder="orderCost"
+            <label class="label">Order price</label>
+            <input #orderCost type="text" nbInput fullWidth fieldSize="small" placeholder="Order cost"
                    value="{{order.orderCost}}" (change)="changeDirection(orderCost)">
           </div>
           <div class="Other-information">
-            <label for="otherInformationUser" class="label">Дополнительная информация</label>
+            <label for="otherInformationUser" class="label">Other information</label>
             <textarea id="otherInformationOrder" nbInput fullWidth placeholder="Other information"></textarea>
           </div>
         </div>
@@ -89,16 +88,16 @@
       <div class="description-flex" *ngIf="customer">
         <div class="description">
           <div class="FIO">
-            <label for="customerCompany" class="label">Фамилия заказчика</label>
+            <label for="customerCompany" class="label">Customer surname</label>
             <input #company type="text" id="customerCompany" nbInput fullWidth fieldSize="small" placeholder="Surname"
               value="{{customer.surname}}">
           </div>
           <div class="FIO">
-            <label for="customerName" class="label">Имя заказчика</label>
+            <label for="customerName" class="label">Customer name</label>
             <input #customerName type="text" id="customerName" nbInput fullWidth fieldSize="small" placeholder="Name" value="{{customer.name}}" (change)="changeName(customerName)">
           </div>
           <div class="FIO">
-            <label for="customerSurname" class="label">Отчество заказчика</label>
+            <label for="customerSurname" class="label">Customer patronymic</label>
             <input #customerSurname type="text" id="customerSurname" nbInput fullWidth fieldSize="small" placeholder="Patronymic"
               value="{{customer.patronymic}}" (change)="changeSurname(customerSurname)">
           </div>
@@ -106,22 +105,22 @@
         <br>
         <div>
           <div class="Number">
-            <label for="customerCompanyNumber" class="label">Компания</label>
-            <input #customerCompanyNumber type="text" id="customerCompanyNumber" nbInput fullWidth fieldSize="small" placeholder="company"
+            <label for="customerCompanyNumber" class="label">Company</label>
+            <input #customerCompanyNumber type="text" id="customerCompanyNumber" nbInput fullWidth fieldSize="small" placeholder="Company"
               value="{{customer.company}}">
           </div>
           <div class="Direction">
-            <label for="customerPatronymic" class="label">Номер компании</label>
-            <input #customerPatronymic type="text" id="customerPatronymic" nbInput fullWidth fieldSize="small" placeholder="companyNumber"
+            <label for="customerPatronymic" class="label">Company number</label>
+            <input #customerPatronymic type="text" id="customerPatronymic" nbInput fullWidth fieldSize="small" placeholder="Company number"
               value="{{customer.companyNumber}}">
           </div>
           <div class="Direction">
-            <label for="customerPatronymic" class="label">Количество заказов</label>
-            <input #customerPatronymic type="text" id="customerPatronymic" nbInput fullWidth fieldSize="small" placeholder="customercol"
+            <label class="label">Number of orders</label>
+            <input #customerPatronymic type="text" nbInput fullWidth fieldSize="small" placeholder="Number of orders"
               value="{{customer.customercol}}">
           </div>
           <div class="Other-information">
-            <label for="otherInformation" class="label">Дополнительная информация</label>
+            <label for="otherInformation" class="label">Other information</label>
             <textarea id="otherInformation" nbInput fullWidth placeholder="Other information"></textarea>
           </div>
         </div>

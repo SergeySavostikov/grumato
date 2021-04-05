@@ -8,13 +8,15 @@ li {
   list-style-type: none;
 }
 
+.label-top {
+  margin-top: 1rem;
+}
+
 .card-header-flex {
   display: flex;
   flex-wrap: nowrap;
 }
 
 .user-content-flex {
-  display: flex;
-  justify-content: space-around;
-  white-space: nowrap;
+  justify-content: space-between;
 }
