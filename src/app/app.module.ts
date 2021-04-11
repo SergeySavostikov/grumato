@@ -44,6 +44,7 @@ import {CreateUserComponent} from './com/project/components/add-data-modal-windo
 import {AppGrumatoState, getInitialState} from "./com/project/store/app-grumato.state";
 import {GetAllDataLoad} from "./com/project/components/components-store/components.action";
 import {UserHelperService} from "./com/project/services/user.helper.service";
+import { GenerateReportViewComponent } from './com/project/components/modals/generate-report-view/generate-report-view.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import {UserHelperService} from "./com/project/services/user.helper.service";
     CreateCustomerComponent,
     CreateOrderComponent,
     CreateUserComponent,
-    UserCardsWindowComponent
+    UserCardsWindowComponent,
+    GenerateReportViewComponent,
   ],
   imports: [
     BrowserModule,

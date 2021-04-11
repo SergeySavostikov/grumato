@@ -1,16 +1,16 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {NbDialogService, NbToastrService, NbTreeGridDataSource, NbTreeGridDataSourceBuilder} from '@nebular/theme';
+import {NbDialogService, NbToastrService, NbTreeGridDataSourceBuilder} from '@nebular/theme';
 import {Employees} from '../component-models/users-model/user.model';
 import {OrderEntry} from '../component-models/orders-model/order.model';
 import {HttpService} from '../../services/http.service';
 import {CreateOrderComponent} from '../add-data-modal-window/create-order/create-order.component';
-import {BaseResponse} from "../users/users.component";
 import {UserCardsWindowComponent} from '../modals/user-cards-window/user-cards-window.component';
-import {select, Store} from "@ngrx/store";
-import {AppGrumatoState} from "../../store/app-grumato.state";
-import {selectData, selectOrders} from "../components-state/data.selector";
-import {GetAllDataLoad, SaveOrders} from "../components-store/components.action";
-import {CustomerEntry} from "../component-models/customers-model/customer.model";
+import {select, Store} from '@ngrx/store';
+import {AppGrumatoState} from '../../store/app-grumato.state';
+import {selectData} from '../components-state/data.selector';
+import {GetAllDataLoad, SaveOrders} from '../components-store/components.action';
+import {CustomerEntry} from '../component-models/customers-model/customer.model';
+import {GenerateReportViewComponent} from '../modals/generate-report-view/generate-report-view.component';
 
 @Component({
   selector: 'app-orders',
@@ -35,7 +35,6 @@ export class OrdersComponent implements OnInit {
   ngOnInit(): void {
     this.store.dispatch(new GetAllDataLoad());
     this.orders$.subscribe(value => {
-      console.log(value);
       if (value) {
         this.orders = value.data.orders;
         this.customers = value.data.customers;
@@ -52,7 +51,7 @@ export class OrdersComponent implements OnInit {
       }
     }).onClose.subscribe(value => {
       if (value) {
-        this.store.dispatch(new SaveOrders(value))
+        this.store.dispatch(new SaveOrders(value));
       }
     });
   }
@@ -64,7 +63,7 @@ export class OrdersComponent implements OnInit {
         this.cdr.detectChanges();
       }
     }
-    this.postService.deleteOrder(dataUser).subscribe(value => console.log(value))
+    this.postService.deleteOrder(dataUser).subscribe(value => console.log(value));
   }
 
   showWorkerInformation(order: OrderEntry) {
@@ -74,9 +73,16 @@ export class OrdersComponent implements OnInit {
       }
     }).onClose.subscribe(value => {
       if (value) {
-        console.log(value)
+        console.info(value);
       }
     });
   }
 
+  orderReport() {
+    this.dialogService.open(GenerateReportViewComponent, {
+      context: {
+        dataState$: this.orders$
+      }
+    }).onClose.subscribe();
+  }
 }

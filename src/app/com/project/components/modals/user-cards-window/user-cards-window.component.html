@@ -5,9 +5,9 @@
     <nb-card-header *ngIf="order">Order information</nb-card-header>
     <nb-card-body class="example-items-col card-body-style">
       <div class="user-flex">
-<!--        <img class="avatar" (click)="showAvatar()" src="../../../../../../assets/images/default_avatar.jpg"/>-->
         <img class="avatar" (click)="showAvatar()" [src]="image"/>
-        <button nbButton class="avatar-button" (click)="changeImage()">Change image</button>
+        <button nbButton status="info" class="avatar-button" (click)="changeImage()">Change image</button>
+        <button nbButton status="info" class="personal-report" (click)="generatePersonalReport()">Personal report</button>
       </div>
       <div class="description-flex" *ngIf="user">
         <div class="description">

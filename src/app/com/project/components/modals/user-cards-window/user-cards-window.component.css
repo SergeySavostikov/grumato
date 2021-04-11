@@ -20,11 +20,6 @@
   margin-top: 1rem;
 }
 
-/*.nb-user[picture] {*/
-/*  width: 150px !important;*/
-/*  height: 150px !important;*/
-/*}*/
-
 .description-flex {
   display: flow-root;
 }
@@ -51,7 +46,7 @@
 .Other-information {
 }
 
-textarea{
+textarea {
   min-height: 81px;
   max-height: 250px;
 }
@@ -59,4 +54,9 @@ textarea{
 .card-size {
   height: auto;
   width: 60rem;
+}
+
+.personal-report {
+  margin-top: 1rem;
+  width: 150px;
 }

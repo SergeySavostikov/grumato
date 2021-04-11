@@ -3,13 +3,14 @@
     <div class="row">
       <div class="col-md-10">
         <button nbButton status="success" (click)="onAddWorker()">Add worker</button>
+        <button nbButton status="info" class="generateButton" (click)="userReport()">Generate report</button>
       </div>
     </div>
   </nb-card-header>
   <nb-card-body>
-    <ul *ngIf="(users$ | async)">
-      <li *ngFor="let dataUser of (users$ | async).data.users">
-        <nb-card  style="border: 1px solid aquamarine" (click)="showWorkerInformation(dataUser)">
+    <ul *ngIf="(dataState$ | async)">
+      <li *ngFor="let dataUser of (dataState$ | async).data.users">
+        <nb-card style="border: 1px solid aquamarine" (click)="showWorkerInformation(dataUser)">
           <nb-card-header>
             <div class="row card-header-flex">
               <div class="col-md-6">
@@ -24,11 +25,13 @@
             <div class="row user-content-flex">
               <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-2">
                 <label class="col-md-12 label" for="userSurname">FIO: </label>
-                <input class="col-md-12" type="text" id="userSurname" nbInput value="{{dataUser.surname}} {{dataUser.name}} {{dataUser.patronymic}}" readonly>
+                <input class="col-md-12" type="text" id="userSurname" nbInput
+                       value="{{dataUser.surname}} {{dataUser.name}} {{dataUser.patronymic}}" readonly>
               </div>
               <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-2">
                 <label class="col-md-12 label" for="userPhoneNumber">Phone: </label>
-                <input class="col-md-12" type="text" id="userPhoneNumber" nbInput readonly value="{{dataUser.phoneNumber}}">
+                <input class="col-md-12" type="text" id="userPhoneNumber" nbInput readonly
+                       value="{{dataUser.phoneNumber}}">
               </div>
               <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-2">
                 <label class="col-md-12 label" for="userDirection">Direction: </label>
@@ -36,7 +39,8 @@
               </div>
               <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-2">
                 <label class="label col-md-12" for="userProject">Project: </label>
-                <input class="col-md-12" type="text" id="userProject" nbInput readonly [value]=onUserProjects(dataUser.project)>
+                <input class="col-md-12" type="text" id="userProject" nbInput readonly
+                       [value]=onUserProjects(dataUser.project)>
               </div>
               <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-2">
                 <label class="col-md-12 label" for="userRole">Role: </label>

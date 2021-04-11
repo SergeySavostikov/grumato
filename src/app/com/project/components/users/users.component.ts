@@ -2,15 +2,15 @@ import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {Employees} from '../component-models/users-model/user.model';
 import {NbDialogService, NbToastrService, NbTreeGridDataSourceBuilder} from '@nebular/theme';
 import {HttpService} from '../../services/http.service';
-
 import {select, Store} from '@ngrx/store';
 import {AppGrumatoState} from '../../store/app-grumato.state';
 import {UserCardsWindowComponent} from '../modals/user-cards-window/user-cards-window.component';
 import {CreateUserComponent} from '../add-data-modal-window/create-user/create-user.component';
 import {DeleteUser, SaveUsers} from '../components-store/components.action';
-import {selectData} from "../components-state/data.selector";
+import {selectData} from '../components-state/data.selector';
 import {OrderEntry} from '../component-models/orders-model/order.model';
-import {UserHelperService} from "../../services/user.helper.service";
+import {UserHelperService} from '../../services/user.helper.service';
+import {GenerateReportViewComponent} from '../modals/generate-report-view/generate-report-view.component';
 
 
 export class BaseResponse {
@@ -26,7 +26,7 @@ export class BaseResponse {
 })
 export class UsersComponent implements OnInit {
 
-  users$ = this.store.pipe(select(selectData));
+  dataState$ = this.store.pipe(select(selectData));
   users: Employees[] = [];
   project: OrderEntry[];
   orders: OrderEntry[];
@@ -42,7 +42,7 @@ export class UsersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.users$.subscribe(data => {
+    this.dataState$.subscribe(data => {
       if (data) {
         this.orders = data.data.orders;
       }
@@ -81,6 +81,14 @@ export class UsersComponent implements OnInit {
 
   onUserProjects(project: string): string {
   return this.userHelperService.convertOrderIdsToOrderNameForUsers(project, this.orders);
+  }
+
+  userReport(){
+    this.dialogService.open(GenerateReportViewComponent, {
+      context: {
+        dataState$: this.dataState$
+      }
+    }).onClose.subscribe();
   }
 }
 

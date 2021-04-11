@@ -11,7 +11,7 @@ import {GetAllDataLoad} from "../components-store/components.action";
 })
 export class GrumatoViewComponent implements OnInit {
 
-  constructor(private router: Router, private store: Store<AppGrumatoState>) { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }

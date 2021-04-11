@@ -29,7 +29,7 @@ export class CreateOrderComponent implements OnInit {
   selectedCustomer: CustomerEntry = null;
 
 
-  constructor(protected ref: NbDialogRef<CreateOrderComponent>, private store: Store<AppGrumatoState>) {
+  constructor(protected ref: NbDialogRef<CreateOrderComponent>) {
   }
 
   ngOnInit() {

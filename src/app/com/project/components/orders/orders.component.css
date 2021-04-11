@@ -26,3 +26,7 @@ li {
   justify-content: space-around;
   white-space: nowrap;
 }
+
+.generateButton {
+  margin-left: 1rem;
+}

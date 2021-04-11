@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {Employees} from '../../component-models/users-model/user.model';
-import {NbDialogRef, NbSelectComponent} from '@nebular/theme';
+import {NbDialogRef, NbDialogService, NbSelectComponent} from '@nebular/theme';
 import {CustomerEntry} from '../../component-models/customers-model/customer.model';
 import {OrderEntry} from '../../component-models/orders-model/order.model';
-import {UserHelperService} from "../../../services/user.helper.service";
+import {UserHelperService} from '../../../services/user.helper.service';
+import {GenerateReportViewComponent} from '../generate-report-view/generate-report-view.component';
 
 @Component({
   selector: 'app-user-cards-window',
@@ -13,14 +14,17 @@ import {UserHelperService} from "../../../services/user.helper.service";
 export class UserCardsWindowComponent implements OnInit {
 
   user: Employees;
+  users: Employees[];
   customer: CustomerEntry;
   order: OrderEntry;
   orders: OrderEntry[];
   selectedOrder: string[] = [];
 
-  image: any = "../../../../../../assets/images/default_avatar.jpg";
+  image: any = '../../../../../../assets/images/default_avatar.jpg';
 
-  constructor(protected ref: NbDialogRef<UserCardsWindowComponent>, private userHelperService: UserHelperService) {
+  constructor(protected ref: NbDialogRef<UserCardsWindowComponent>,
+              private userHelperService: UserHelperService,
+              private dialogService: NbDialogService) {
   }
 
   ngOnInit(): void {
@@ -96,6 +100,10 @@ export class UserCardsWindowComponent implements OnInit {
   }
 
   changeImage() {
-    this.image = "../../../../../../assets/images/alternative_avatar.jpg";
+    this.image = '../../../../../../assets/images/alternative_avatar.jpg';
+  }
+
+  generatePersonalReport() {
+    this.dialogService.open(GenerateReportViewComponent, {}).onClose.subscribe();
   }
 }

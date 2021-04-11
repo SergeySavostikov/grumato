@@ -3,12 +3,12 @@ import {NbDialogService, NbToastrService, NbTreeGridDataSource, NbTreeGridDataSo
 import {HttpService} from '../../services/http.service';
 import {CustomerEntry} from '../component-models/customers-model/customer.model';
 import {CreateCustomerComponent} from '../add-data-modal-window/create-customer/create-customer.component';
-import {BaseResponse} from "../users/users.component";
 import {UserCardsWindowComponent} from '../modals/user-cards-window/user-cards-window.component';
-import {AppGrumatoState} from "../../store/app-grumato.state";
-import {select, Store} from "@ngrx/store";
-import {selectData} from "../components-state/data.selector";
-import {GetAllDataLoad} from "../components-store/components.action";
+import {AppGrumatoState} from '../../store/app-grumato.state';
+import {select, Store} from '@ngrx/store';
+import {selectData} from '../components-state/data.selector';
+import {GetAllDataLoad} from '../components-store/components.action';
+import {GenerateReportViewComponent} from '../modals/generate-report-view/generate-report-view.component';
 
 @Component({
   selector: 'app-customers',
@@ -20,10 +20,6 @@ export class CustomersComponent implements OnInit {
   customColumn = 'Name';
   defaultColumns = ['Order', 'CompanyName', 'Pay'];
   allColumns = [this.customColumn, ...this.defaultColumns];
-
-  dataSource: NbTreeGridDataSource<CustomerEntry>;
-
-
   customers: CustomerEntry[] = [];
   customers$ = this.store.pipe(select(selectData));
   data = [];
@@ -48,13 +44,12 @@ export class CustomersComponent implements OnInit {
       if (value) {
         this.customers = value.data.customers;
       }
-    })
+    });
   }
-
 
   onAddCustomer() {
     this.dialogService.open(CreateCustomerComponent).onClose.subscribe(value => {
-      let newCustomer:CustomerEntry = {
+      let newCustomer: CustomerEntry = {
         surname: value.surname,
         name: value.name,
         patronymic: value.patronymic,
@@ -65,7 +60,7 @@ export class CustomersComponent implements OnInit {
       for (let order of this.customers) {
         if (order.name == newCustomer.name) {
           // ToDo change to filter in backend part
-          this.toast.danger("Такой заказчик существует", "Внимание");
+          this.toast.danger('Такой заказчик существует', 'Внимание');
           return;
         }
       }
@@ -78,25 +73,33 @@ export class CustomersComponent implements OnInit {
   }
 
   onDelete(dataUser: CustomerEntry) {
-    for (let item = 0; item< this.customers.length; item++) {
+    for (let item = 0; item < this.customers.length; item++) {
       if (this.customers[item].name == dataUser.name) {
         this.customers.splice(item, 1);
         this.cdr.detectChanges();
       }
     }
-    this.postService.deleteCustomer(dataUser).subscribe(value => console.log(value))
+    this.postService.deleteCustomer(dataUser).subscribe(value => console.log(value));
   }
 
   showWorkerInformation(customer: CustomerEntry) {
     this.dialogService.open(UserCardsWindowComponent, {
-        context: {
-          customer: customer
-        }
+      context: {
+        customer: customer
+      }
     }).onClose.subscribe(value => {
       if (value) {
         console.log(value);
       }
     });
+  }
+
+  customerReport() {
+    this.dialogService.open(GenerateReportViewComponent, {
+      context: {
+        dataState$: this.customers$
+      }
+    }).onClose.subscribe();
   }
 
 }
