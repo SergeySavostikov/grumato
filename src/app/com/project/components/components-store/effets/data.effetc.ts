@@ -6,6 +6,8 @@ import {Router} from '@angular/router';
 import {HttpService} from '../../../services/http.service';
 import {map, switchMap} from 'rxjs/operators';
 import {
+  DeleteCustomer,
+  DeleteOrder,
   DeleteUser,
   EEditorActions,
   GetAllDataLoad,
@@ -19,6 +21,8 @@ import {
 } from '../components.action';
 import {BaseResponse} from "../../users/users.component";
 import {DataState} from "../../components-state/data.state";
+import {CustomersBaseResponse} from '../../customers/customers.component';
+import {OrdersBaseResponse} from '../../orders/orders.component';
 
 @Injectable()
 export class DataEffect {
@@ -43,7 +47,11 @@ export class DataEffect {
   addCustomer$ = this.actions$.pipe(
     ofType<SaveCustomers>(EEditorActions.SaveCustomers),
     map((action) => {
-      this.httpService.postCustomer(action.payload);
+      this.httpService.postCustomer(action.payload).subscribe(value => {
+        if ((value as CustomersBaseResponse).status === '200') {
+          this.store.dispatch(new GetAllDataLoad());
+        }
+      });
     })
   );
 
@@ -60,8 +68,9 @@ export class DataEffect {
     ofType<SaveOrders>(EEditorActions.SaveOrders),
     map((action) => {
       this.httpService.postOrders(action.payload).subscribe(value => {
-        console.log(value);
-        this.store.dispatch(new GetAllDataLoad());
+        if((value as OrdersBaseResponse).status === '200') {
+          this.store.dispatch(new GetAllDataLoad());
+        }
       });
     }));
 
@@ -81,7 +90,7 @@ export class DataEffect {
         if ((value as BaseResponse).status === '200') {
           this.store.dispatch(new GetAllDataLoad());
         }
-      })
+      });
     })
   );
 
@@ -109,6 +118,28 @@ export class DataEffect {
     ofType<DeleteUser>(EEditorActions.DeleteUser),
     switchMap((action) => {
       return this.httpService.deleteUser(action.payload);
+    }),
+    map(() => {
+      this.store.dispatch(new GetAllDataLoad());
+    })
+  );
+
+  @Effect({dispatch: false})
+  deleteOrder$ = this.actions$.pipe(
+    ofType<DeleteOrder>(EEditorActions.DeleteOrder),
+    switchMap((action) => {
+      return this.httpService.deleteOrder(action.payload);
+    }),
+    map(() => {
+      this.store.dispatch(new GetAllDataLoad());
+    })
+  );
+
+  @Effect({dispatch: false})
+  deleteCustomer$ = this.actions$.pipe(
+    ofType<DeleteCustomer>(EEditorActions.DeleteCustomer),
+    switchMap((action) => {
+      return this.httpService.deleteCustomer(action.payload);
     }),
     map(() => {
       this.store.dispatch(new GetAllDataLoad());

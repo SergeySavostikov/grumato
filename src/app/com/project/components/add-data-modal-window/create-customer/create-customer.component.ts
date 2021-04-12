@@ -17,10 +17,9 @@ export class CreateCustomerComponent implements OnInit {
 
   constructor(protected ref: NbDialogRef<CreateCustomerComponent>) { }
 
-  selectedItem = '1';
-
   orderSelected: boolean;
 
+  //ToDo refactor to customer model
   ngOnInit() {
     this.surname= '';
     this.name= '';
@@ -28,18 +27,7 @@ export class CreateCustomerComponent implements OnInit {
     this.customercol= '';
     this.company= '';
     this.companyNumber= '';
-
-    // if(this.customercol == ''){
-    //   this.order_name = !this.order_name;
-    // }
-    // else {
-    //   this.order_name = this.order_name;
-    // }
   }
-
-  // onClear(){
-  //   return this.customercol = "";
-  // }
 
   cancel() {
     this.ref.close(false)

@@ -1,13 +1,13 @@
 <div class="col-md-12">
   <nb-card class="generate-report-wrapper">
-    <nb-card-header *ngIf="this.users.length > 0">Worker</nb-card-header>
-    <nb-card-header *ngIf="this.orders.length > 0">Order</nb-card-header>
-    <nb-card-header *ngIf="this.customers.length > 0">Customer</nb-card-header>
+    <nb-card-header *ngIf="isComponent == usersReport">Worker</nb-card-header>
+    <nb-card-header *ngIf="isComponent == ordersReport">Order</nb-card-header>
+    <nb-card-header *ngIf="isComponent == customersReport">Customer</nb-card-header>
     <nb-card-body class="create-user">
       <div>
-        <button nbButton status="info" *ngIf="this.users.length > 0" (click)="generateUserReport()">create user report</button>
-        <button nbButton status="info" *ngIf="this.orders.length > 0" (click)="generateOrderReport()">create order report</button>
-        <button nbButton status="info" *ngIf="this.customers.length > 0" (click)="generateCustomerReport()">create customer report</button>
+        <button nbButton status="info" *ngIf="isComponent == usersReport">create user report</button>
+        <button nbButton status="info" *ngIf="isComponent == ordersReport">create order report</button>
+        <button nbButton status="info" *ngIf="isComponent == customersReport">create customer report</button>
         <button nbButton status="info" class="general-report" (click)="generateGeneralReport()">create general report</button>
         <div id="wdr-component" >Generate report</div>
       </div>

@@ -5,9 +5,26 @@
     <nb-card-header *ngIf="order">Order information</nb-card-header>
     <nb-card-body class="example-items-col card-body-style">
       <div class="user-flex">
-        <img class="avatar" (click)="showAvatar()" [src]="image"/>
+        <ng-template #dialog let-data let-ref="dialogRef">
+          <img class="avatar-dialog" [src]="imageUrl"/>
+        </ng-template>
+        <img class="avatar" (click)="showAvatar(dialog)" [src]="imageUrl"/>
         <button nbButton status="info" class="avatar-button" (click)="changeImage()">Change image</button>
         <button nbButton status="info" class="personal-report" (click)="generatePersonalReport()">Personal report</button>
+
+        <!--Input To Select File-->
+        <label for="file">Select File
+          <!--Review Image-->
+          <img class="avatar" [src]="imageUrl" alt="Image Review">
+        </label>
+        <input type="file" id="file" accept="image/*" hidden (change)="onSelectNewFile($event.target?.files)">
+
+        <!--Image Base64 Code-->
+        <textarea rows="10" disabled [innerHTML]="base64"></textarea>
+
+        <!--Buttons-->
+        <button (click)="convertFileToBase64()">Convert Image To Base64</button>
+
       </div>
       <div class="description-flex" *ngIf="user">
         <div class="description">

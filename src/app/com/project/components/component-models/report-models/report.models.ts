@@ -21,3 +21,10 @@ export interface GeneralReportModel {
   company?: string;
   companyNumber?: string;
 }
+
+export enum GenerateTypes {
+  GENERATE_USERS,
+  GENERATE_ORDERS,
+  GENERATE_CUSTOMERS,
+  GENERATE_ALL
+}

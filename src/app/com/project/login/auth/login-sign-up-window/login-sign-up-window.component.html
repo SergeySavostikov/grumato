@@ -1,12 +1,10 @@
 <nb-card class="container card-width">
   <nb-card-header>Sign Up</nb-card-header>
   <nb-card-body>
-<!--    <div class="form-group col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">-->
     <div class="form-group col-md-12">
       <label for="userName" class="label">login</label>
       <input class="user-input-adaptive" type="text" status="success" nbInput id="userName" #userNameInput [(ngModel)]="userName" (ngModelChange)="isChange(userNameInput)">
     </div>
-<!--    <div class="form-group col-12 col-sm-12 col-md-12 col-lg-6 col-xl-4">-->
     <div class="form-group col-md-12">
       <label for="userPassword" class="label">Password</label>
       <input class="user-input-adaptive" type="password" nbInput status="success" id="userPassword" #userPasswordInput [(ngModel)]="password" (ngModelChange)="isChange(userPasswordInput)">

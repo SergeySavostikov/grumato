@@ -14,7 +14,9 @@ export enum EEditorActions {
   UserLoaded = "[Editor] Users loaded",
   GetAllDataLoad = "[Editor] Get All Data Load",
   GetAllDataLoaded = "[Editor] Get All Data Loaded",
-  DeleteUser = "[Editor] Delete User"
+  DeleteUser = "[Editor] Delete User",
+  DeleteOrder = "[Editor] Delete Order",
+  DeleteCustomer = "[Editor] Delete Customer"
 }
 
 
@@ -85,6 +87,18 @@ export class DeleteUser implements Action {
   constructor(public payload: Employees) {
   }
 }
+export class DeleteOrder implements Action {
+  public readonly type = EEditorActions.DeleteOrder;
+
+  constructor(public payload: OrderEntry) {
+  }
+}
+export class DeleteCustomer implements Action {
+  public readonly type = EEditorActions.DeleteCustomer;
+
+  constructor(public payload: CustomerEntry) {
+  }
+}
 
 export type EditorAction =
   GetCustomers |
@@ -96,4 +110,6 @@ export type EditorAction =
   UsersLoaded |
   GetAllDataLoad |
   GetAllDataLoaded |
-  DeleteUser;
+  DeleteUser |
+  DeleteOrder |
+  DeleteCustomer;

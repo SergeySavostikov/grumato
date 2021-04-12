@@ -6,7 +6,7 @@ import {Observable} from 'rxjs';
 import {DataState} from '../../components-state/data.state';
 import {CustomerEntry} from '../../component-models/customers-model/customer.model';
 import {OrderEntry} from '../../component-models/orders-model/order.model';
-import {GeneralReportModel} from '../../component-models/report-models/report.models';
+import {GeneralReportModel, GenerateTypes} from '../../component-models/report-models/report.models';
 import {UserHelperService} from '../../../services/user.helper.service';
 
 @Component({
@@ -21,6 +21,12 @@ export class GenerateReportViewComponent implements OnInit {
   orders: OrderEntry[] = [];
   customers: CustomerEntry[] = [];
   datas: any[] = [];
+  isComponent: GenerateTypes;
+  usersReport: GenerateTypes = GenerateTypes.GENERATE_USERS;
+  ordersReport: GenerateTypes = GenerateTypes.GENERATE_ORDERS;
+  customersReport: GenerateTypes = GenerateTypes.GENERATE_CUSTOMERS;
+  // ToDO refactor for generate report to all data
+  generalReport: GenerateTypes = GenerateTypes.GENERATE_ALL;
 
   constructor(protected ref: NbDialogRef<GenerateReportViewComponent>) {
   }
@@ -43,42 +49,6 @@ export class GenerateReportViewComponent implements OnInit {
 
   cancel() {
     this.ref.close(false);
-  }
-
-  generateUserReport() {
-    const pivot = new WebDataRocks({
-      container: '#wdr-component',
-      toolbar: true,
-      report: {
-        dataSource: {
-          data: [this.users[0]],
-        }
-      }
-    });
-  }
-
-  generateOrderReport() {
-    const pivot = new WebDataRocks({
-      container: '#wdr-component',
-      toolbar: true,
-      report: {
-        dataSource: {
-          data: [this.orders[0]],
-        }
-      }
-    });
-  }
-
-  generateCustomerReport() {
-    const pivot = new WebDataRocks({
-      container: '#wdr-component',
-      toolbar: true,
-      report: {
-        dataSource: {
-          data: [this.customers[0]],
-        }
-      }
-    });
   }
 
   generateGeneralReport() {

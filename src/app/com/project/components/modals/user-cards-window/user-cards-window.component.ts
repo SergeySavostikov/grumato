@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, TemplateRef} from '@angular/core';
 import {Employees} from '../../component-models/users-model/user.model';
 import {NbDialogRef, NbDialogService, NbSelectComponent} from '@nebular/theme';
 import {CustomerEntry} from '../../component-models/customers-model/customer.model';
 import {OrderEntry} from '../../component-models/orders-model/order.model';
 import {UserHelperService} from '../../../services/user.helper.service';
 import {GenerateReportViewComponent} from '../generate-report-view/generate-report-view.component';
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-user-cards-window',
@@ -20,17 +21,38 @@ export class UserCardsWindowComponent implements OnInit {
   orders: OrderEntry[];
   selectedOrder: string[] = [];
 
+  base64: string = "Base64...";
+  fileSelected?: Blob;
+  imageUrl?: string = "";
+
   image: any = '../../../../../../assets/images/default_avatar.jpg';
 
   constructor(protected ref: NbDialogRef<UserCardsWindowComponent>,
               private userHelperService: UserHelperService,
-              private dialogService: NbDialogService) {
+              private dialogService: NbDialogService,
+              private sant: DomSanitizer) {
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  //ToDo -> services -> user.helper.service
+  onSelectNewFile(files: FileList): void {
+    this.fileSelected = files[0];
+    this.imageUrl = this.sant.bypassSecurityTrustUrl(window.URL.createObjectURL(this.fileSelected)) as string;
+    this.base64 = "Base64..."
   }
 
-  showAvatar() {
+  //ToDo -> services -> user.helper.service
+  convertFileToBase64(): void{
+    let reader = new FileReader();
+    reader.readAsDataURL(this.fileSelected as Blob);
+    reader.onload = () => {
+      this.base64 = reader.result as string;
+    }
+  }
+
+  showAvatar(dialog: TemplateRef<any>) {
+    this.dialogService.open(dialog, {});
   }
 
   edit() {

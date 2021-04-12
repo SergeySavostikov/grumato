@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {NbDialogRef} from '@nebular/theme';
 import {IAngularMyDpOptions, IMyDateModel} from "angular-mydatepicker";
-import {AppGrumatoState} from "../../../store/app-grumato.state";
-import {Store} from "@ngrx/store";
 import {CustomerEntry} from "../../component-models/customers-model/customer.model";
 
 @Component({

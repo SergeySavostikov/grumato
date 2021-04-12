@@ -2,15 +2,20 @@ import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {NbDialogService, NbToastrService, NbTreeGridDataSourceBuilder} from '@nebular/theme';
 import {Employees} from '../component-models/users-model/user.model';
 import {OrderEntry} from '../component-models/orders-model/order.model';
-import {HttpService} from '../../services/http.service';
 import {CreateOrderComponent} from '../add-data-modal-window/create-order/create-order.component';
 import {UserCardsWindowComponent} from '../modals/user-cards-window/user-cards-window.component';
 import {select, Store} from '@ngrx/store';
 import {AppGrumatoState} from '../../store/app-grumato.state';
 import {selectData} from '../components-state/data.selector';
-import {GetAllDataLoad, SaveOrders} from '../components-store/components.action';
+import {DeleteOrder, SaveOrders} from '../components-store/components.action';
 import {CustomerEntry} from '../component-models/customers-model/customer.model';
 import {GenerateReportViewComponent} from '../modals/generate-report-view/generate-report-view.component';
+import {GenerateTypes} from '../component-models/report-models/report.models';
+
+export class OrdersBaseResponse {
+  status: string;
+  code: string;
+}
 
 @Component({
   selector: 'app-orders',
@@ -28,17 +33,14 @@ export class OrdersComponent implements OnInit {
               private dialogService: NbDialogService,
               private cdr: ChangeDetectorRef,
               private toast: NbToastrService,
-              private store: Store<AppGrumatoState>,
-              private postService: HttpService) {
+              private store: Store<AppGrumatoState>,) {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(new GetAllDataLoad());
     this.orders$.subscribe(value => {
       if (value) {
         this.orders = value.data.orders;
         this.customers = value.data.customers;
-        this.cdr.detectChanges();
       }
     });
   }
@@ -56,14 +58,8 @@ export class OrdersComponent implements OnInit {
     });
   }
 
-  onDelete(dataUser: OrderEntry) {
-    for (let item = 0; item < this.orders.length; item++) {
-      if (this.orders[item].orderCode == dataUser.orderCode) {
-        this.orders.splice(item, 1);
-        this.cdr.detectChanges();
-      }
-    }
-    this.postService.deleteOrder(dataUser).subscribe(value => console.log(value));
+  onDelete(dataOrder: OrderEntry) {
+    this.store.dispatch(new DeleteOrder(dataOrder));
   }
 
   showWorkerInformation(order: OrderEntry) {
@@ -81,7 +77,8 @@ export class OrdersComponent implements OnInit {
   orderReport() {
     this.dialogService.open(GenerateReportViewComponent, {
       context: {
-        dataState$: this.orders$
+        dataState$: this.orders$,
+        isComponent: GenerateTypes.GENERATE_ORDERS
       }
     }).onClose.subscribe();
   }

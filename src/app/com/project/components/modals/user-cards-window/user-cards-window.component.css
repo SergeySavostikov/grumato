@@ -15,6 +15,11 @@
   border-radius: 15px;
 }
 
+.avatar-dialog {
+  width: 100%;
+  border-radius: 15px;
+}
+
 .avatar-button {
   width: 150px;
   margin-top: 1rem;

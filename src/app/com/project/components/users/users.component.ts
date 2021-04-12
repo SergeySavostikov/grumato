@@ -1,7 +1,6 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {Employees} from '../component-models/users-model/user.model';
 import {NbDialogService, NbToastrService, NbTreeGridDataSourceBuilder} from '@nebular/theme';
-import {HttpService} from '../../services/http.service';
 import {select, Store} from '@ngrx/store';
 import {AppGrumatoState} from '../../store/app-grumato.state';
 import {UserCardsWindowComponent} from '../modals/user-cards-window/user-cards-window.component';
@@ -11,13 +10,13 @@ import {selectData} from '../components-state/data.selector';
 import {OrderEntry} from '../component-models/orders-model/order.model';
 import {UserHelperService} from '../../services/user.helper.service';
 import {GenerateReportViewComponent} from '../modals/generate-report-view/generate-report-view.component';
+import {GenerateTypes} from '../component-models/report-models/report.models';
 
 
 export class BaseResponse {
   status: string;
   code: string;
 }
-
 
 @Component({
   selector: 'app-users',
@@ -37,7 +36,6 @@ export class UsersComponent implements OnInit {
               private cdr: ChangeDetectorRef,
               private store: Store<AppGrumatoState>,
               private toast: NbToastrService,
-              private postService: HttpService,
               private userHelperService: UserHelperService) {
   }
 
@@ -46,7 +44,7 @@ export class UsersComponent implements OnInit {
       if (data) {
         this.orders = data.data.orders;
       }
-    })
+    });
   }
 
   onAddWorker() {
@@ -56,7 +54,6 @@ export class UsersComponent implements OnInit {
       }
     }).onClose.subscribe(value => {
       if (value) {
-
         this.store.dispatch(new SaveUsers(value));
       }
     });
@@ -70,7 +67,7 @@ export class UsersComponent implements OnInit {
       }
     }).onClose.subscribe(value => {
       if (value) {
-        this.store.dispatch(new SaveUsers(value))
+        this.store.dispatch(new SaveUsers(value));
       }
     });
   }
@@ -80,13 +77,14 @@ export class UsersComponent implements OnInit {
   }
 
   onUserProjects(project: string): string {
-  return this.userHelperService.convertOrderIdsToOrderNameForUsers(project, this.orders);
+    return this.userHelperService.convertOrderIdsToOrderNameForUsers(project, this.orders);
   }
 
-  userReport(){
+  userReport() {
     this.dialogService.open(GenerateReportViewComponent, {
       context: {
-        dataState$: this.dataState$
+        dataState$: this.dataState$,
+        isComponent: GenerateTypes.GENERATE_USERS
       }
     }).onClose.subscribe();
   }
