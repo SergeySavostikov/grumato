@@ -8,5 +8,6 @@ export interface Employees {
   phoneNumber: string;
   direction: string;
   project: string;
+  userAvatar: string;
   // role: string;
 }

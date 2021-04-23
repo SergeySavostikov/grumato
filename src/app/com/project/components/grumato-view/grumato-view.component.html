@@ -1,7 +1,8 @@
 <nb-layout>
   <nb-layout-column class="colored-column-basic">
     <nb-card>
-      <nb-card-header status="primary">
+      <nb-card-header status="primary" class="user-header">
+        <nb-user class="user-view" size="medium" name="User" (click)="showUserInformation()"></nb-user>
         <button nbButton class="float-right" status="info" (click)="logout()">Logout</button>
       </nb-card-header>
       <nb-card-body>

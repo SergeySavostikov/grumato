@@ -8,7 +8,8 @@
         <ng-template #dialog let-data let-ref="dialogRef">
           <img class="avatar-dialog" [src]="imageUrl"/>
         </ng-template>
-        <img class="avatar" (click)="showAvatar(dialog)" [src]="imageUrl"/>
+<!--        <img class="avatar" (click)="showAvatar(dialog)" [src]="imageUrl"/>-->
+<!--        <img class="avatar" (click)="showAvatar(dialog)" [src]="user.userAvatar"/>-->
         <button nbButton status="info" class="avatar-button" (click)="changeImage()">Change image</button>
         <button nbButton status="info" class="personal-report" (click)="generatePersonalReport()">Personal report</button>
 

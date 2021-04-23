@@ -69,7 +69,7 @@ export class CustomersComponent implements OnInit {
       }
     }).onClose.subscribe(value => {
       if (value) {
-        console.log(value);
+       this.store.dispatch(new SaveCustomers(value));
       }
     });
   }

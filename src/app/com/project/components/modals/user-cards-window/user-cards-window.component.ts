@@ -48,7 +48,7 @@ export class UserCardsWindowComponent implements OnInit {
     reader.readAsDataURL(this.fileSelected as Blob);
     reader.onload = () => {
       this.base64 = reader.result as string;
-    }
+    };
   }
 
   showAvatar(dialog: TemplateRef<any>) {
@@ -57,8 +57,9 @@ export class UserCardsWindowComponent implements OnInit {
 
   edit() {
     if (this.user) {
+      this.user.userAvatar = this.base64;
       this.ref.close({
-        user: this.user
+        user: this.user,
       });
     }
     if (this.customer) {

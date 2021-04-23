@@ -1,0 +1,11 @@
+.user-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.user-view {
+  width: 100px;
+  /*box-sizing: content-box;*/
+  border: 2px #2ce69b;
+  border-radius: 5px;
+}

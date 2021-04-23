@@ -67,6 +67,7 @@ export class UsersComponent implements OnInit {
       }
     }).onClose.subscribe(value => {
       if (value) {
+        console.log(value);
         this.store.dispatch(new SaveUsers(value));
       }
     });

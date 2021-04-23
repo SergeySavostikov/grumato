@@ -3,6 +3,8 @@ import {Router} from '@angular/router';
 import {Store} from "@ngrx/store";
 import {AppGrumatoState} from "../../store/app-grumato.state";
 import {GetAllDataLoad} from "../components-store/components.action";
+import {NbDialogService} from '@nebular/theme';
+import {UserCardsWindowComponent} from '../modals/user-cards-window/user-cards-window.component';
 
 @Component({
   selector: 'app-grumato-view',
@@ -11,13 +13,18 @@ import {GetAllDataLoad} from "../components-store/components.action";
 })
 export class GrumatoViewComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+              private dialogService: NbDialogService) { }
 
   ngOnInit(): void {
   }
 
   logout() {
     this.router.navigate(['']);
+  }
+
+  showUserInformation() {
+    this.dialogService.open(UserCardsWindowComponent).onClose.subscribe();
   }
 
   tabs: any[] = [
