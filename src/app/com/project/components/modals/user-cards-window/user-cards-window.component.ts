@@ -57,9 +57,15 @@ export class UserCardsWindowComponent implements OnInit {
 
   edit() {
     if (this.user) {
-      this.user.userAvatar = this.base64;
+      const {surname, project, phoneNumber, patronymic, employeeCode, direction, name} = this.user;
       this.ref.close({
-        user: this.user,
+        surname,
+        project,
+        phoneNumber,
+        patronymic,
+        employeeCode,
+        direction,
+        name
       });
     }
     if (this.customer) {

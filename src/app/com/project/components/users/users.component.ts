@@ -54,7 +54,7 @@ export class UsersComponent implements OnInit {
       }
     }).onClose.subscribe(value => {
       if (value) {
-        this.store.dispatch(new SaveUsers(value));
+        this.saveUser(value);
       }
     });
   }
@@ -67,10 +67,13 @@ export class UsersComponent implements OnInit {
       }
     }).onClose.subscribe(value => {
       if (value) {
-        console.log(value);
-        this.store.dispatch(new SaveUsers(value));
+        this.saveUser(value);
       }
     });
+  }
+
+  saveUser(user: Employees) {
+    this.store.dispatch(new SaveUsers(user));
   }
 
   onDelete(data: Employees) {

@@ -85,12 +85,15 @@ export class DataEffect {
   @Effect({dispatch: false})
   addUsers$ = this.actions$.pipe(
     ofType<SaveUsers>(EEditorActions.SaveUsers),
-    map((action) => {
-      this.httpService.postUsers(action.payload).subscribe(value => {
-        if ((value as BaseResponse).status === '200') {
-          this.store.dispatch(new GetAllDataLoad());
-        }
-      });
+    switchMap((action) => {
+      return this.httpService.postUsers(action.payload)
+    }),
+    switchMap((value) => {
+      if ((value as BaseResponse).status === '200') {
+        this.store.dispatch(new GetAllDataLoad());
+        return 'done';
+      }
+      return 'error';
     })
   );
 
