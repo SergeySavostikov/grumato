@@ -39,7 +39,8 @@ export class UserCardsWindowComponent implements OnInit {
   onSelectNewFile(files: FileList): void {
     this.fileSelected = files[0];
     this.imageUrl = this.sant.bypassSecurityTrustUrl(window.URL.createObjectURL(this.fileSelected)) as string;
-    this.base64 = "Base64..."
+    this.base64 = "Base64...";
+    return this.convertFileToBase64();
   }
 
   //ToDo -> services -> user.helper.service
@@ -48,6 +49,11 @@ export class UserCardsWindowComponent implements OnInit {
     reader.readAsDataURL(this.fileSelected as Blob);
     reader.onload = () => {
       this.base64 = reader.result as string;
+      this.user.userAvatar = this.base64;
+      console.log("this.user.userAvatar");
+      console.log(this.user.userAvatar);
+      console.log("this.user.userAvatar.length");
+      console.log(this.user.userAvatar.length);
     };
   }
 
@@ -57,7 +63,7 @@ export class UserCardsWindowComponent implements OnInit {
 
   edit() {
     if (this.user) {
-      const {surname, project, phoneNumber, patronymic, employeeCode, direction, name} = this.user;
+      const {surname, project, phoneNumber, patronymic, employeeCode, direction, name, userAvatar} = this.user;
       this.ref.close({
         surname,
         project,
@@ -65,7 +71,8 @@ export class UserCardsWindowComponent implements OnInit {
         patronymic,
         employeeCode,
         direction,
-        name
+        name,
+        userAvatar
       });
     }
     if (this.customer) {
@@ -108,10 +115,6 @@ export class UserCardsWindowComponent implements OnInit {
     }
   }
 
-  changePatronymic(patronymic: HTMLInputElement) {
-    this.user.patronymic = patronymic.value;
-  }
-
   changePhoneNumber(phoneNumber: HTMLInputElement) {
     this.user.phoneNumber = phoneNumber.value;
   }
@@ -126,10 +129,6 @@ export class UserCardsWindowComponent implements OnInit {
 
   onChangeSelectedOrder(selectedOrders: NbSelectComponent) {
     this.selectedOrder = selectedOrders.selected;
-  }
-
-  changeImage() {
-    this.image = '../../../../../../assets/images/alternative_avatar.jpg';
   }
 
   generatePersonalReport() {
