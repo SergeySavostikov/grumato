@@ -5,7 +5,8 @@ import {SignUpModel} from '../../login/login-model/sign-up.model';
 export enum LoginPageActions {
   Login = '[Login] Login User',
   SignUpUser = '[Login] Sign Up User',
-  SignInUser = '[Login] Sign In User'
+  SignInUser = '[Login] Sign In User',
+  IsAvailableUserName = '[Login] Is Available User Name',
 }
 
 export class LoginUser implements Action {
@@ -29,4 +30,11 @@ export class SignInUser implements Action {
   }
 }
 
-export type LoginActions = LoginUser | SignUpUser | SignInUser
+export class IsAvailableUserName implements Action {
+  public readonly type = LoginPageActions.IsAvailableUserName;
+
+  constructor(public payload: string) {
+  }
+}
+
+export type LoginActions = LoginUser | SignUpUser | SignInUser | IsAvailableUserName

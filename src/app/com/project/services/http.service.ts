@@ -20,26 +20,20 @@ export class HttpService {
   }
 
   signUpUserData(userData: SignUpModel) {
-    let requestBody = {
-      login: {
-        userName: userData.userName,
-        userPassword: userData.password
-      }
-    };
     return this.http.post('http://localhost:8080/login/add', {login: {
-      userName: userData.userName, userPassword: userData.password
+      userName: userData.userName, userPassword: userData.password, userType: userData.userType
       }})
   }
 
   signInUserData(loginData: LoginModel){
-    let requestBody = {
-      login: {
-        userName: loginData.userName,
-        userPassword: loginData.password
-      }
-    };
     return this.http.post('http://localhost:8080/login/auth', {login: {
         userName: loginData.userName, userPassword: loginData.password
+      }})
+  }
+
+  isAvailableUserName(userName: string) {
+    return this.http.post('http://localhost:8080/login/isAvailableUserName', {login: {
+      userName: userName
       }})
   }
 

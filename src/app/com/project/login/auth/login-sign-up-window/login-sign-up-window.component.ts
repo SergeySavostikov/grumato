@@ -1,5 +1,8 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {NbDialogRef, NbDialogService, NbToastrService} from '@nebular/theme';
+import {Store} from "@ngrx/store";
+import {AppGrumatoState} from "../../../store/app-grumato.state";
+import {IsAvailableUserName, SignInUser} from "../../../store/login-store/login-page.actions";
 
 @Component({
   selector: 'app-login-sign-up-window',
@@ -9,9 +12,11 @@ import {NbDialogRef, NbDialogService, NbToastrService} from '@nebular/theme';
 export class LoginSignUpWindowComponent implements OnInit {
   userName: string;
   password: string;
+  userType: string;
   isName: boolean = false;
 
-  constructor(protected ref: NbDialogRef<LoginSignUpWindowComponent>, private dialogService: NbDialogService, private toastrService: NbToastrService) {
+  constructor(protected ref: NbDialogRef<LoginSignUpWindowComponent>, private dialogService: NbDialogService,
+              private toastrService: NbToastrService, private store: Store<AppGrumatoState>) {
   }
 
   ngOnInit(): void {
@@ -23,7 +28,7 @@ export class LoginSignUpWindowComponent implements OnInit {
       this.isName = true
     }
     if (this.userName && this.password) {
-      this.ref.close({name: this.userName, password: this.password});
+      this.ref.close({name: this.userName, password: this.password, userType: this.userType || 'USER'});
     } else {
       this.toastrService.danger("Please write Login / Password", "Attention", {duration: 2000})
     }
@@ -35,7 +40,7 @@ export class LoginSignUpWindowComponent implements OnInit {
 
   isChange(element: HTMLElement) {
     switch (element.id) {
-      case 'userName': this.changeStyleInput(element);
+      case 'userName': this.isAvailableName(element);
       break;
       case "userPassword": this.changeStyleInput(element);
       break;
@@ -45,4 +50,9 @@ export class LoginSignUpWindowComponent implements OnInit {
   private changeStyleInput(element) {
     element.value ? element.style.border = '1px solid green' : element.style.border = '1px solid red'
   }
+
+  private isAvailableName(element) {
+    this.store.dispatch(new IsAvailableUserName(element.value))
+  }
 }
+

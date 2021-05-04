@@ -14,8 +14,8 @@ import {GetAllDataLoad} from "../../components/components-store/components.actio
 })
 export class AuthComponent implements OnInit {
 
-  constructor(private httpService: HttpService, private store: Store<AppGrumatoState>,
-              private dialogService: NbDialogService, private toastrService: NbToastrService) {
+  constructor(private store: Store<AppGrumatoState>, private dialogService: NbDialogService,
+              private toastrService: NbToastrService) {
   }
 
 
@@ -36,19 +36,14 @@ export class AuthComponent implements OnInit {
 
 
   open() {
-    let userLogin: string = '';
-    let userPassword: string = '';
     this.dialogService.open(LoginSignUpWindowComponent, {
       context: {},
     }).onClose.subscribe(value => {
       if (value) {
-        userLogin = value.name;
-        userPassword = value.password;
-        this.userName = userLogin;
-        this.password = userPassword;
         this.store.dispatch(new SignUpUser({
-          userName: userLogin,
-          password: userPassword
+          userName: value.name,
+          password: value.password,
+          userType: value.userType
         }));
         return status = "success";
       }
